@@ -1,0 +1,32 @@
+html {
+	font-size: 16px;
+}
+
+body {
+	font-size: 100%;
+	line-height: 1.6;
+	background-color: #03a3a3;
+}
+
+.navbar {
+	font-size: 1.3em;
+	font-family: neuton-cursive, cursive;
+	color: white;
+}
+
+a.navbar-brand {
+	font-size: 1.6em;
+}
+
+.btn-primary {
+	background-color: #ceaffa;
+	color: #000;
+}
+
+.btn-primary:hover {
+	color: #fff;
+}
+
+.container {
+	color: #222;
+}
