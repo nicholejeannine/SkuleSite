@@ -1,17 +1,22 @@
 var express = require('express'),
 	// DO I NEED TO USE BODY PARSER HERE? IF I CALL IT DIRECTLY ON THE POST ROUTES?
-	bodyParser = require('body-parser'),
-	/**/
-	app = express();
+	mainCtrl = require('./controllers/mainCtrl.js'),
+	userCtrl = require('./controllers/userCtrl.js');
+/**/
+var app = express();
 
 app.set('view engine', 'ejs');
 
+app.use('/', mainCtrl);
 app.use(express.static(__dirname + "/public"));
+
+/*// DO I NEED THIS HERE?
 app.use(bodyParser.urlencoded({
 	extended: false
-}));
+}));*/
 
-app.use('/', require('./controllers/main.js'));
+
+app.use('/user/', userCtrl);
 
 /* require your controllers and set app to use them, like this:
 

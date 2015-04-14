@@ -14,6 +14,10 @@
 
 				<li><span class="glyphicon glyphicon-education" aria-hidden="true"></span>
 				</li>
+				<% if (signedIn) { %>
+					<li><a href="#">Search Schools</a>
+					</li>
+					<% } %>
 			</ul>
 
 		</div>
@@ -22,11 +26,19 @@
 
 				<li><a href="/about">About</a>
 				</li>
-				<li><a href="#">Sign Up!</a>
-				</li>
-				<li><a href="/signin">Sign In</a>
-				</li>
+				<% if (!signedIn) { %>
+					<li><a href="#">Sign Up!</a>
+					</li>
+					<li><a href="/signin">Sign In</a>
+					</li>
 
+					<% } else { %>
+
+
+						<li><a href="#">Log Out</a>
+						</li>
+
+						<% } %>
 			</ul>
 
 		</div>

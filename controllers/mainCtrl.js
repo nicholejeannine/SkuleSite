@@ -5,18 +5,21 @@ var router = express.Router();
 //home page route
 router.get('/', function (req, res) {
 	console.log('home page route');
-	res.render('main/index');
+	res.render('main/index', ({
+		signedIn: false,
+	}));
 });
 
-//GET /about
+//GET /about  page is requested, respond with the page.
 router.get('/about', function (req, res) {
 	res.render('main/about');
 });
 
-
+// signin page is requested, respond with the signin page.
 router.get('/signin', function (req, res) {
 	res.render('main/signin');
 });
+
 
 
 
