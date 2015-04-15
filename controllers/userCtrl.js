@@ -1,6 +1,6 @@
 var express = require('express'),
 	router = express.Router(),
-	bcypt = require('bcrypt'),
+	bcrypt = require('bcrypt'),
 	passport = require('passport'),
 	ensureLogin = require('./ensureLogin'),
 	db = require('../models'),
@@ -19,7 +19,7 @@ router.post('/signup', function (req, res, next) {
 	}
 	db.user.create({
 			username: req.body.username,
-			password: bcrypt.hashSync(req.body.password, process.env.SESSION_SECRET)
+			password: bcrypt.hashSync(req.body.password, 10)
 		}, {
 			fields: ['username', 'password']
 		})
