@@ -80,7 +80,7 @@ module.exports = function (sequelize, DataTypes) {
 		},
 		classMethods: {
 			associate: function (models) {
-				school.belongsToMany(user, {
+				school.belongsToMany(models.user, {
 					as: 'Schools',
 					through: 'userschools'
 				})

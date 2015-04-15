@@ -7,13 +7,16 @@ module.exports = function (sequelize, DataTypes) {
 			primaryKey: true,
 			type: DataTypes.INTEGER
 		},
-		username: DataTypes.STRING,
+		username: {
+			type: DataTypes.STRING,
+			unique: true
+		},
 		password: DataTypes.STRING
 	}, {
 		timestamps: false,
 		classMethods: {
 			associate: function (models) {
-				user.belongsToMany(school, {
+				user.belongsToMany(models.school, {
 					as: 'Users',
 					through: 'userschools'
 				})
