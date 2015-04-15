@@ -25,12 +25,10 @@ app.use(bodyParser.urlencoded({
 	extended: false
 }));
 app.use(session({
-	resave: false,
+	resave: true,
 	saveUninitialized: true,
 	secret: process.env.SESSION_SECRET,
-	cookie: {
-		maxAge: 60000
-	}
+
 }));
 
 app.use(flash());

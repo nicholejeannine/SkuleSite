@@ -24,14 +24,21 @@ router.post('/signup', function (req, res, next) {
 			fields: ['username', 'password']
 		})
 		.then(function (user) {
-			req.flash('info', 'Welcome.');
-			return res.redirect('/');
+			req.login(user, function () {
+				req.flash('info', 'Welcome.');
+				return res.redirect('/');
+			});
 		})
 		.catch(db.sequelize.ValidationError, function (err) {
 			req.flash('info', 'Username allready exist.');
 			return res.redirect('/signup');
 		})
 		.catch(next);
+});
+
+router.get('/logout', function (req, res, next) {
+	req.logout();
+	return res.redirect('/');
 });
 
 module.exports = router;

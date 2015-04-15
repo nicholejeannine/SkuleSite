@@ -3,6 +3,7 @@ var router = express.Router();
 
 // get request made to home page. Response: "here's your generic home page."
 router.get('/', function (req, res) {
+	console.log(req.user);
 	res.render('main/index', ({
 		signedIn: req.isAuthenticated(),
 	}));
