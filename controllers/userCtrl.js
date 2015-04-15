@@ -8,7 +8,7 @@ var express = require('express'),
 
 // when the user clicks the "log in", a get request to "user" is made. Renders their homepage if user and password match; otherwise, sends an error.  
 router.post('/signin', passport.authenticate('local', {
-	successRedirect: '/myHomepage',
+	successRedirect: '/user/myHomepage',
 	failureRedirect: '/signin'
 }));
 

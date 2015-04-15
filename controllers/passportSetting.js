@@ -15,7 +15,7 @@ passport.use(new LocalStrategy({
 		// query the user from the database
 		// don't care the way I query from database, you can use
 		// any method to query the user from database
-		user.findOne({
+		db.user.findOne({
 				where: {
 					username: username
 				}
