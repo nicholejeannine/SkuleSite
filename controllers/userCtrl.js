@@ -1,8 +1,10 @@
 var express = require('express'),
 	router = express.Router(),
+	bcypt = require('bcrypt'),
 	passport = require('passport'),
+	ensureLogin = require('./ensureLogin'),
 	db = require('../models'),
-	bodyParser = require('body-parser')
+	bodyParser = require('body-parser');
 
 // when the user clicks the "log in", a get request to "user" is made. Renders their homepage if user and password match; otherwise, sends an error.  
 router.post('/signin', passport.authenticate('local', {
@@ -13,18 +15,21 @@ router.post('/signin', passport.authenticate('local', {
 router.post('/signup', function (req, res, next) {
 	if (!req.body.password) {
 		req.flash('info', 'No password.');
-		return res.redirect('/user/myHomepage');
+		return res.redirect('/signup');
 	}
-	db.user.create(req.body, {
+	db.user.create({
+			username: req.body.username,
+			password: bcrypt.hashSync(req.body.password, process.env.SESSION_SECRET)
+		}, {
 			fields: ['username', 'password']
 		})
 		.then(function (user) {
 			req.flash('info', 'Welcome.');
-			return res.redirect('/user/myHomepage');
+			return res.redirect('/');
 		})
 		.catch(db.sequelize.ValidationError, function (err) {
 			req.flash('info', 'Username allready exist.');
-			return res.redirect('/user/signup');
+			return res.redirect('/signup');
 		})
 		.catch(next);
 });
