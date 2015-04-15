@@ -1,11 +1,19 @@
 var express = require('express'),
-	router = express.Router();
-
-/*
+	router = express.Router(),
+	passport = require('passport'),
 	db = require('../models'),
 	bodyParser = require('body-parser'),
-	passport = require('passport'),
 	localStrategy = require('passport-local').Strategy;
+
+// when the user clicks the "log in", a get request to "user" is made. Renders their homepage if user and password match; otherwise, sends an error.  
+router.get('/user', ensureLoggedIn('/login'), function (req, res) {
+	res.render('user/myHomepage', {
+		user: req.user
+	});
+});
+
+
+/*
 
 // called when the user clicks on the signin page.
 router.get('/user', function (req, res) {

@@ -8,7 +8,7 @@ router.get('/schools:schoolName', function (req, res) {
 
 	var schoolName = req.query.q;
 
-	res.render('/schools/short')
+	res.render('/schools/show')
 });
 
 
