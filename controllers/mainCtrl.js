@@ -10,14 +10,14 @@ router.get('/', function (req, res) {
 
 //GET /about  page is requested, respond with the static "about" page.
 router.get('/about', function (req, res) {
-	res.render('main/index', ({
+	res.render('main/about', ({
 		signedIn: req.isAuthenticated(),
 	}));
 });
 
 // signin page is requested, respond with the signin page.
 router.get('/signin', function (req, res) {
-	res.render('main/index', ({
+	res.render('main/signin', ({
 		signedIn: req.isAuthenticated(),
 	}));
 });
@@ -25,7 +25,7 @@ router.get('/signin', function (req, res) {
 
 //sign-up page is requested, respond with the signup page.
 router.get('/signup', function (req, res) {
-	res.render('main/index', ({
+	res.render('main/signup', ({
 		signedIn: req.isAuthenticated(),
 	}));
 });
