@@ -27,7 +27,7 @@ app.use(bodyParser.urlencoded({
 app.use(session({
 	resave: false,
 	saveUninitialized: true,
-	secret: process.env.SECRET_SESSION,
+	secret: process.env.SESSION_SECRET,
 	cookie: {
 		maxAge: 60000
 	}
@@ -47,10 +47,10 @@ app.listen(process.env.PORT || 3000, function () {
 	console.log("Server listening.");
 });
 
-app.get('/hello', function (req, res, next) {
-	next('404');
-});
-
-app.use(function (err, req, res, next) {
-	if (err === '404') res.render('notFound');
-});
+//app.get('/hello', function (req, res, next) {
+//	next('404');
+//});
+//
+//app.use(function (err, req, res, next) {
+//	if (err === '404') res.render('notFound');
+//});
