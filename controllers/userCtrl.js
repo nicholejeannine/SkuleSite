@@ -37,8 +37,8 @@ router.post('/signup', function (req, res, next) {
 });
 
 router.get('/logout', function (req, res, next) {
-	req.logout();
-	return res.redirect('/');
+	req.session.destroy(function (err) {
+		return res.redirect('/'); //Inside a callback… bulletproof!
+	});
 });
-
 module.exports = router;
