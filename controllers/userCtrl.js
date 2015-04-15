@@ -5,12 +5,12 @@ var express = require('express'),
 	bodyParser = require('body-parser')
 
 // when the user clicks the "log in", a get request to "user" is made. Renders their homepage if user and password match; otherwise, sends an error.  
-router.post('/login', passport.authenticate('local', {
+router.post('/signin', passport.authenticate('local', {
 	successRedirect: '/user/myHomepage',
 	failureRedirect: '/user/login'
 }));
 
-router.post('/', function (req, res, next) {
+router.post('/signup', function (req, res, next) {
 	if (!req.body.password) {
 		req.flash('info', 'No password.');
 		return res.redirect('/user/myHomepage');
