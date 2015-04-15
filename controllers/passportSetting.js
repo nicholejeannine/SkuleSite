@@ -1,3 +1,4 @@
+var db = require('../models');
 var passport = require('passport');
 var bcrypt = require('bcrypt');
 var LocalStrategy = require('passport-local').Strategy;
@@ -41,7 +42,27 @@ passport.use(new LocalStrategy({
 	}
 ));
 
-module.exports = function (req, res, next) {
-	passport.initialize()(req, res, next);
-	passport.session()(req, res, next);
+passport.serializeUser(function (user, done) {
+	done(null, user.id);
+});
+
+passport.deserializeUser(function (id, done) {
+	db.user.findOne({
+			where: {
+				id: id
+			}
+		})
+		.then(function (user) {
+			done(null, user);
+		})
+		.catch(function (err) {
+			done(err, false);
+		});
+});
+
+
+
+module.exports = function (app) {
+	app.use(passport.initialize());
+	app.use(passport.session());
 };

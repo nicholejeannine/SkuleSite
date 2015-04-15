@@ -12,14 +12,12 @@
 				<li class="active"><a class="navbar-brand" href="/">Skool Sites</a>
 				</li>
 
-				<% if (signedIn) { %>
-					<li><span class="glyphicon glyphicon-education" aria-hidden="true"></span>
-					</li>
-					<li><a href="#">Find Schools</a>
-					</li>
-					<li><a href="#">My HomePage</a>
-					</li>
-					<% } %>
+				<li><span class="glyphicon glyphicon-education" aria-hidden="true"></span>
+				</li>
+				<li><a href="#">Find Schools</a>
+				</li>
+				<li><a href="#">My HomePage</a>
+				</li>
 			</ul>
 
 		</div>
@@ -29,20 +27,16 @@
 
 				<li><a href="/about">About</a>
 				</li>
-				<% if (!signedIn){ %>
-					<li><a href="/signup">Sign Up!</a>
-					</li>
-					<li><a href="/signin">Sign In</a>
-					</li>
-
-					<% } %>
+				<li><a href="/signup">Sign Up!</a>
+				</li>
+				<li><a href="/signin">Sign In</a>
+				</li>
 
 
-						<% if (signedIn) { %>
-							<li><a href="#">Log Out</a>
-							</li>
 
-							<% } %>
+				<li><a href="#">Log Out</a>
+				</li>
+
 			</ul>
 
 		</div>
