@@ -45,6 +45,8 @@ router.get('/logout', function (req, res, next) {
 });
 
 router.get('/myHomepage', function (req, res, next) {
-	res.render('user/myHomepage');
-})
+	res.render('user/myHomepage', {
+		signedIn: true
+	});
+});
 module.exports = router;
