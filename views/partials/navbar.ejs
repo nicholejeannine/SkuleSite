@@ -12,10 +12,12 @@
 				<li class="active"><a class="navbar-brand" href="/">Skool Sites</a>
 				</li>
 
-				<li><span class="glyphicon glyphicon-education" aria-hidden="true"></span>
-				</li>
 				<% if (signedIn) { %>
-					<li><a href="#">Search Schools</a>
+					<li><span class="glyphicon glyphicon-education" aria-hidden="true"></span>
+					</li>
+					<li><a href="#">Find Schools</a>
+					</li>
+					<li><a href="#">My HomePage</a>
 					</li>
 					<% } %>
 			</ul>
@@ -24,21 +26,23 @@
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-right">
 
+
 				<li><a href="/about">About</a>
 				</li>
-				<% if (!signedIn) { %>
-					<li><a href="#">Sign Up!</a>
+				<% if (!signedIn){ %>
+					<li><a href="/signup">Sign Up!</a>
 					</li>
 					<li><a href="/signin">Sign In</a>
 					</li>
 
-					<% } else { %>
+					<% } %>
 
 
-						<li><a href="#">Log Out</a>
-						</li>
+						<% if (signedIn) { %>
+							<li><a href="#">Log Out</a>
+							</li>
 
-						<% } %>
+							<% } %>
 			</ul>
 
 		</div>
