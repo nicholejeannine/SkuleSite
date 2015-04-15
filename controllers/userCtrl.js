@@ -38,6 +38,8 @@ router.post('/signup', function (req, res, next) {
 
 router.get('/logout', function (req, res, next) {
 	req.session.destroy(function (err) {
+		req.flash('info', 'Logout');
+
 		return res.redirect('/'); //Inside a callback… bulletproof!
 	});
 });

@@ -3,9 +3,12 @@
 
 	<div class="row">
 		<div class="col-xs-offset-3 col-xs-6 col-md-offset-4 col-md-4 col-lg-offset-5 col-lg-2 center-block">
-			<h1>Skool Site!!!</h1>
-			<h2><small>Yeah, cool tagline, too.</small></h2>
-			<h3>Saying something about the purpose of this site. Good times.</h3>
+			<% if (locals.messages && locals.messages.info) { %> <span> <%= locals.messages.info %> </span>
+				<% } %>
+
+					<h1>Skool Site!!!</h1>
+					<h2><small>Yeah, cool tagline, too.</small></h2>
+					<h3>Saying something about the purpose of this site. Good times.</h3>
 		</div>
 
 
