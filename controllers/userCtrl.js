@@ -8,14 +8,14 @@ var express = require('express'),
 
 // when the user clicks the "log in", a get request to "user" is made. Renders their homepage if user and password match; otherwise, sends an error.  
 router.post('/signin', passport.authenticate('local', {
-	successRedirect: '/user/myHomepage',
-	failureRedirect: '/user/login'
+	successRedirect: '/myHomepage',
+	failureRedirect: '/signin'
 }));
 
 router.post('/signup', function (req, res, next) {
 	if (!req.body.password) {
 		req.flash('info', 'No password.');
-		return res.redirect('/signup');
+		return res.redirect('/user/signup');
 	}
 	db.user.create({
 			username: req.body.username,
@@ -43,4 +43,8 @@ router.get('/logout', function (req, res, next) {
 		return res.redirect('/'); //Inside a callback… bulletproof!
 	});
 });
+
+router.get('/myHomepage', function (req, res, next) {
+	res.render('/user/myHomepage');
+})
 module.exports = router;
