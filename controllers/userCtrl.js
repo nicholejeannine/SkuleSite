@@ -38,13 +38,13 @@ router.post('/signup', function (req, res, next) {
 
 router.get('/logout', function (req, res, next) {
 	req.session.destroy(function (err) {
-		req.flash('info', 'Logout');
+		//req.flash('info', 'Logout');
 
 		return res.redirect('/'); //Inside a callback… bulletproof!
 	});
 });
 
 router.get('/myHomepage', function (req, res, next) {
-	res.render('/user/myHomepage');
+	res.render('user/myHomepage');
 })
 module.exports = router;
