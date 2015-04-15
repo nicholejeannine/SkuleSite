@@ -37,10 +37,10 @@ app.use(flash());
 app.use(passportSetting);
 
 
+app.use(express.static(__dirname + "/public"));
 app.use('/', mainCtrl);
 app.use('/user/', userCtrl);
 app.use('/schools/', schoolCtrl);
-app.use(express.static(__dirname + "/public"));
 
 
 app.listen(process.env.PORT || 3000, function () {
