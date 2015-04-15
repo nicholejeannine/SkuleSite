@@ -34,8 +34,7 @@ app.use(session({
 }));
 
 app.use(flash());
-app.use(passportSetting);
-
+passportSetting(app);
 
 app.use(express.static(__dirname + "/public"));
 app.use('/', mainCtrl);
