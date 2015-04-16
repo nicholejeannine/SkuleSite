@@ -4,6 +4,7 @@ var express = require('express'),
 	passport = require('passport'),
 	ensureLogin = require('./ensureLogin'),
 	db = require('../models'),
+	flash = require('express-flash'),
 	bodyParser = require('body-parser');
 
 // when the user clicks the "log in", a get request to "user" is made. Renders their homepage if user and password match; otherwise, sends an error.  
@@ -38,9 +39,9 @@ router.post('/signup', function (req, res, next) {
 
 router.get('/logout', function (req, res, next) {
 	req.session.destroy(function (err) {
-		//req.flash('info', 'Logout');
+		req.flash('info', 'Logout');
 
-		return res.redirect('/'); //Inside a callback… bulletproof!
+		return res.redirect('/');
 	});
 });
 

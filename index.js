@@ -7,7 +7,7 @@ var express = require('express'),
 	bcrypt = require('bcrypt'),
 	session = require('express-session'),
 	cookieParser = require('cookie-parser'),
-	flash = require('connect-flash'),
+	flash = require('express-flash'),
 	passportSetting = require('./controllers/passportSetting');
 
 var app = express();
@@ -20,6 +20,7 @@ app.use(function (req, res, next) {
 	console.log(time + ":  attempting " + req.method + " on " + req.originalUrl);
 	next();
 });
+
 app.use(cookieParser(process.env.SECRET_COOKIE));
 app.use(bodyParser.urlencoded({
 	extended: false
