@@ -14,9 +14,12 @@ router.post('/signin', passport.authenticate('local', {
 }));
 
 router.post('/signup', function (req, res, next) {
-	if (!req.body.password) {
-		req.flash('info', 'No password.');
-		return res.redirect('/user/signup');
+	if (!req.body.password || !req.body.username) {
+		req.flash('info', 'Please choose a username and password that you will remember.');
+		return res.redirect('/signup');
+	} else if (req.body.password.length < 5) {
+		req.flash('info', 'Please try a little bit harder to come up with a secure password. You must use at least 5 characters.');
+		return res.redirect('/signup');
 	}
 	db.user.create({
 			username: req.body.username,
@@ -26,13 +29,13 @@ router.post('/signup', function (req, res, next) {
 		})
 		.then(function (user) {
 			req.login(user, function () {
-				req.flash('info', 'Welcome.');
+				req.flash('info', 'Welcome ' + user.username + ' .');
 				return res.redirect('/');
 			});
 		})
 		.catch(db.sequelize.ValidationError, function (err) {
-			req.flash('info', 'Username allready exist.');
-			return res.redirect('/signup');
+			req.flash('info', 'Username allready exist. Please choose a different user name.');
+			return res.redirect('/user/:username');
 		})
 		.catch(next);
 });
@@ -45,9 +48,5 @@ router.get('/logout', function (req, res, next) {
 	});
 });
 
-router.get('/myHomepage', function (req, res, next) {
-	res.render('user/myHomepage', {
-		signedIn: true
-	});
-});
+
 module.exports = router;

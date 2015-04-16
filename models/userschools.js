@@ -28,7 +28,7 @@ module.exports = function (sequelize, DataTypes) {
 			associate: function (models) {
 				models.user.hasMany(models.school);
 				models.school.hasMany(models.user);
-			};
+			}
 		}
 	});
 	return userschools;
