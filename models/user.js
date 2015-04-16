@@ -24,7 +24,7 @@ module.exports = function (sequelize, DataTypes) {
 					as: 'Users',
 					through: 'userschools'
 				})
-			}
+			},
 		}
 	});
 	return user;

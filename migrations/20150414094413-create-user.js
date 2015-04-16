@@ -9,10 +9,13 @@ module.exports = {
 				type: DataTypes.INTEGER
 			},
 			username: {
-				type: DataTypes.STRING
+				type: DataTypes.STRING,
+				allowNull: false,
+				unique: true
 			},
 			password: {
-				type: DataTypes.STRING
+				type: DataTypes.STRING,
+				allowNull: false,
 			},
 		}).done(done);
 	},

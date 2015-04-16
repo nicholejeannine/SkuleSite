@@ -19,7 +19,9 @@ module.exports = {
 				referencesKey: "unitId"
 			},
 			color: {
-				type: DataTypes.STRING
+				type: DataTypes.STRING,
+				allowNull: true,
+				defaultValue: "grey"
 			},
 		}).done(done);
 	},

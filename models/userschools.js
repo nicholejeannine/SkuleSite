@@ -18,7 +18,9 @@ module.exports = function (sequelize, DataTypes) {
 			referencesKey: "unitId"
 		},
 		color: {
-			type: DataTypes.STRING
+			type: DataTypes.STRING,
+			allowNull: true,
+			defaultValue: "grey"
 		}
 	}, {
 		timestamps: false,
@@ -26,7 +28,7 @@ module.exports = function (sequelize, DataTypes) {
 			associate: function (models) {
 				models.user.hasMany(models.school);
 				models.school.hasMany(models.user);
-			}
+			};
 		}
 	});
 	return userschools;
