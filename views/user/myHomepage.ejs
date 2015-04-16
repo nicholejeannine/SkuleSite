@@ -1,52 +1,75 @@
 <% include ../partials/header.ejs%>
+<% var unsortedList = [], maybeList = [], probablyList = [], definitelyList = [];
+schools.forEach(school, function(){
+	if ((school[color]) == 'grey'){
+		unsortedList.push(school);
+	} else if ((school[color]) == 'yellow'){
+		maybeList.push(school);
+	} else if ((school[color]) == 'orange') {
+		probablyList.push(school);
+	} else if ((school[color]) == 'green'){
+		definitelyList.push(school);
+	}
+	})%>
 
-	<section class="bg-info">
+
+<div class="top">
+	<section class="bg-info droppable">
 		<div class="row">
-			<div class="col-xs-12">
+			<div class="col-sm-6 pull-left">
 				<h2>My Unsorted Schools</h2>
 				<ul class="schoolList" id="unsortedList">
-
+<% unsortedList.forEach(function(school){ %>
+	<li class="draggable sortable"><%=school%> </li>
+<% }) %>
 
 				</ul>
 			</div>
 		</div>
 	</section>
 
-	<section class="bg-warning">
+	<section class="bg-warning droppable">
 		<div class="row">
-			<div class="col-xs-12">
+			<div class="col-sm-6 pull-right">
 				<h2>My Maybe Schools</h2>
 				<ul class="schoolList" id="maybeList">
-
+<% maybeList.forEach(function(school){ %>
+	<li class="draggable sortable"><%=school%> </li>
+<% }) %>
 
 				</ul>
 			</div>
 		</div>
 	</section>
-
-	<section class="bg-danger">
+</div>
+<div class="bottom">
+	<section class="bg-danger droppable">
 		<div class="row">
-			<div class="col-xs-12">
+			<div class="col-sm-6 pull-left">
 				<h2>My Probably Schools</h2>
 				<ul class="schoolList" id="probablyList">
 
-
+<% probablyList.forEach(function(school){ %>
+	<li class="draggable sortable"><%=school%> </li>
+<% }) %>
 				</ul>
 			</div>
 		</div>
 	</section>
 
-	<section class="bg-success">
+	<section class="bg-success droppable">
 		<div class="row">
-			<div class="col-xs-12">
+			<div class="col-sm-6 pull-right">
 				<h2>My Definitely Schools</h2>
 				<ul class="schoolList" id="definitelyList">
-
+<% definitelyList.forEach(function(school){ %>
+	<li class="draggable sortable"><%=school%> </li>
+<% }) %>
 
 				</ul>
 			</div>
 		</div>
 	</section>
-
+</div>
 
 	<% include ../partials/footer.ejs%>

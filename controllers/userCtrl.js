@@ -5,6 +5,7 @@ var express = require('express'),
 	ensureLogin = require('./ensureLogin'),
 	db = require('../models'),
 	flash = require('express-flash'),
+	sequealize = require('sequelize'),
 	bodyParser = require('body-parser');
 
 // when the user clicks the "log in", a get request to "user" is made. Renders their homepage if user and password match; otherwise, sends an error.  
@@ -30,23 +31,44 @@ router.post('/signup', function (req, res, next) {
 		.then(function (user) {
 			req.login(user, function () {
 				req.flash('info', 'Welcome ' + user.username + ' .');
-				return res.redirect('/');
+				return res.redirect('/user/myHomepage');
 			});
 		})
 		.catch(db.sequelize.ValidationError, function (err) {
 			req.flash('info', 'Username allready exist. Please choose a different user name.');
-			return res.redirect('/user/:username');
+			return res.redirect('/user/myHomepage');
 		})
 		.catch(next);
 });
 
 router.get('/logout', function (req, res, next) {
 	req.session.destroy(function (err) {
-		req.flash('info', 'Logout');
+		//req.flash('info', 'Logout');
 
 		return res.redirect('/');
 	});
 });
 
+router.get('/myHomepage', function (req, res, next) {
+	db.user.findOne({
+		where: {
+			username: req.param.username
+		}
+	}).then(function (user) {
+		db.userschools.findAll({
+			where: {
+				db.userschools.userId: user.id
+			}
+		}).spread(function (schools) {
+
+			res.render('user/myHomepage', {
+				allSchools: schools
+			})
+		}).catch(err) {
+			console.log('error!', err);
+			next();
+		}
+	});
+});
 
 module.exports = router;
