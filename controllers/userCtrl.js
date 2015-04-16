@@ -21,7 +21,7 @@ router.post('/signup', function (req, res, next) {
 	} else if (req.body.password.length < 5) {
 		req.flash('info', 'Please try a little bit harder to come up with a secure password. You must use at least 5 characters.');
 		return res.redirect('/signup');
-	} 
+	}
 	db.user.create({
 			username: req.body.username,
 			password: bcrypt.hashSync(req.body.password, 10)
@@ -50,7 +50,7 @@ router.get('/logout', function (req, res, next) {
 });
 
 router.get('/myHomepage', function (req, res, next) {
-	
+	res.render('/user/myHomepage')
 });
 
 module.exports = router;

@@ -3,18 +3,17 @@
 
 	<div class="row">
 		<div class="col-xs-offset-3 col-xs-6 col-md-offset-4 col-md-4 col-lg-offset-5 col-lg-2 center-block">
-			<% if (locals.messages && locals.messages.info) { %> <span> <%= locals.messages.info %> </span>
-				<% } %>
-					<h1>Skool Site!!!</h1>
-					<h2 class="fancy"><small>Yeah, cool tagline, too.</small></h2>
-					<h3 class="block-quote">Saying something about the purpose of this site. Good times.</h3>
+
+			<h1>Skool Site!!!</h1>
+			<h2 class="fancy"><small>Yeah, cool tagline, too.</small></h2>
+			<h3 class="block-quote">Saying something about the purpose of this site. Good times.</h3>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-xs-offset-3 col-xs-6 col-md-offset-4 col-md-4 col-lg-offset-5 col-lg-2">
-			
-						<p><a href="./signin.ejs">Sign In</a> or <a href="./signup.ejs">Register</a> to search for colleges and simplify your to-apply list!</p>
-			<p>Not Sure? <strong>Check out the demo!</strong> Enter:</br>Username:     Demo</br>Password:     Demo</p>
-					</div>
+
+			<p><a href="/signin">Sign In</a> or <a href="/signup">Register</a> to search for colleges and simplify your to-apply list!</p>
+
 		</div>
+	</div>
 	<% include ../partials/footer.ejs%>

@@ -2,65 +2,18 @@
 
 
 	<div class="row">
-		<div class="col-xs-offset-3 col-xs-6 col-md-offset-4 col-md-4 col-lg-offset-5 col-lg-2 center-block">
-			<% if (locals.messages && locals.messages.info) { %> <span> <%= locals.messages.info %> </span>
-				<% } %>
-
-		</div>
-	</div>
-	<div class="row">
 
 		<div class="col-xs-offset-3 col-xs-6 col-md-offset-4 col-md-4 col-lg-offset-5 col-lg-2 center-block">
 
 
-			<form>
-				<h4>Search By (choose one):</h4>
+			<form method="get" action="/schools/search">
+				<h4>Search Schools By Name:</h4>
+				<input type="text" placeholder="School Name" name="q" class="form-control" id="txtSchoolName">
 
-
-				<select class="form-group">
-					<option value="q" name="searchBy">School Name</option>
-					<option value="s" name="searchBy">State</option>
-					<option value="p" name="searchBy">Program</option>
-				</select>
-				<div class="form-group">
-					<input name="q" id="q" type="text" class="form-control">
-					<input name="s" id="s" type="text" class="form-control" size="2">
-					<select name="p" id="p" class="form-control">
-						<option value="01"> Agriculture, Agriculture Operations, and Related Sciences </option>
-						<option value="04"> Architecture and Related Services</option>
-						<option value="05"> Area, Ethnic, Cultural, Gender and Group Studies</option>
-						<option value="26"> Biological And Biomedical Sciences</option>
-						<option value="52"> Business, Management, Marketing, and Related Support Services</option>
-						<option value="10"> Communication Technologies/Technicians and Support Services</option>
-						<option value="09"> Communication, Journalism, and Related Programs</option>
-						<option value="11"> Computer and Information Sciences and Support Services</option>
-						<option value="46"> Construction Trades</option>
-						<option value="13"> Education</option>
-						<option value="14"> Engineering</option>
-						<option value="15"> Engineering Technology and Engineering-Related Fields</option>
-						<option value="23"> English Language and Literature/Letters</option>
-						<option value="19"> Family and Consumer Sciences/Human Sciencess</option>
-						<option value="51"> Health Professions and Related Programs</option>
-						<option value="54"> History</option>
-						<option value="43"> Homeland Security, Law Enforcement, Firefighting and Related Protective Services</option>
-						<option value="16"> Foreign Languages, Literatures, and Linguistics</option>
-						<option value="22"> Legal Professions and Studies</option>
-						<option value="24"> Liberal Arts and Sciences, General Studies and Humanities</option>
-						<option value="25"> Library Science</option>
-						<option value="27"> Mathematics and Statistics</option>
-						<option value="47"> Mechanic and Repair Technologies/Technicians</option>
-						<option value="29"> Military Technologies and Applied Sciences</option>
-
-						<option value="30"> Multi/Interdisciplinary Studies</option>
-						<option value="03"> Natural Resources and Conservation</option>
-						<option value="31"> Parks, Recreation, Leisure, and Fitness Studies</option>
-						<option value="38"> Philosophy and Religious Studies</option>
-						<option value="40">Physical Sciences</option>
-						<option value="42">Psychology</option>
-						<option value="45">Social sciences</option>
-						<option value="50">Visual and performing arts:</option>
-					</select>
+				<button type="submit" class="btn btn-primary" id="getSchoolResults">Search</button>
 			</form>
-			</div>
 		</div>
-		<% include ../partials/footer.ejs%>
+
+
+	</div>
+	<% include ../partials/footer.ejs%>
