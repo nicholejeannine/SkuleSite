@@ -41,14 +41,6 @@ app.use('/user/', userCtrl);
 app.use('/schools/', schoolCtrl);
 
 
-app.listen(process.env.PORT || 3000, function () {
+app.listen(process.env.PORT 80 || 3000, function () {
 	console.log("Server listening.");
 });
-
-//app.get('/hello', function (req, res, next) {
-//	next('404');
-//});
-//
-//app.use(function (err, req, res, next) {
-//	if (err === '404') res.render('notFound');
-//});

@@ -21,7 +21,7 @@ router.post('/signup', function (req, res, next) {
 	} else if (req.body.password.length < 5) {
 		req.flash('info', 'Please try a little bit harder to come up with a secure password. You must use at least 5 characters.');
 		return res.redirect('/signup');
-	} 
+	}
 	db.user.create({
 			username: req.body.username,
 			password: bcrypt.hashSync(req.body.password, 10)
@@ -36,7 +36,7 @@ router.post('/signup', function (req, res, next) {
 		})
 		.catch(db.sequelize.ValidationError, function (err) {
 			req.flash('info', 'Username allready exist. Please choose a different user name.');
-			return res.redirect('/');
+			return res.redirect('/user/myHomepage');
 		})
 		.catch(next);
 });
@@ -50,7 +50,25 @@ router.get('/logout', function (req, res, next) {
 });
 
 router.get('/myHomepage', function (req, res, next) {
-	
+	db.user.findOne({
+		where: {
+			username: req.param.username
+		}
+	}).then(function (user) {
+		db.userschools.findAll({
+			where: {
+				db.userschools.userId: user.id
+			}
+		}).spread(function (schools) {
+
+			res.render('user/myHomepage', {
+				allSchools: schools
+			})
+		}).catch(err) {
+			console.log('error!', err);
+			next();
+		}
+	});
 });
 
 module.exports = router;
