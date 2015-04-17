@@ -8,12 +8,12 @@ router.get('/', function (req, res, next) {
 
 
 router.get('/schools/', function (req, res) {
-	res.render('schools/search');
+	res.render('auth/schools/search');
 });
 
 router.get('/schools/search/:q', function (req, res) {
 	var schoolName = req.query.q;
-	res.render('schools/show', {
+	res.render('auth/schools/show', {
 		results: results
 	});
 });

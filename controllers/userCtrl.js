@@ -15,12 +15,13 @@ router.post('/signin', passport.authenticate('local', {
 }));
 
 router.post('/signup', function (req, res, next) {
+	var doFlash = req.flash();
 	if (!req.body.password || !req.body.username) {
 		req.flash('info', 'Please choose a username and password.');
-		return res.redirect('/signup');
+		return res.render('main/signup', doFlash);
 	} else if (req.body.password.length < 5) {
-		req.flash('info', 'Please try a little bit harder to come up with a secure password. You must use at least 5 characters.');
-		return res.redirect('/signup');
+		req.flash('danger', 'Please try a little bit harder to come up with a secure password. You must use at least 5 characters.');
+		return res.render('/signup');
 	}
 	db.user.create({
 			username: req.body.username,
