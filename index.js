@@ -2,7 +2,8 @@ var express = require('express'),
 	bodyParser = require('body-parser'),
 	mainCtrl = require('./controllers/mainCtrl.js'),
 	userCtrl = require('./controllers/userCtrl.js'),
-	schoolCtrl = require('./controllers/schoolCtrl.js'),
+	authCtrl = require('./controllers/authCtrl.js'),
+	ensureLogin = require('./controllers/ensureLogin.js'),
 	user = require('./models/user'),
 	bcrypt = require('bcrypt'),
 	session = require('express-session'),
@@ -15,11 +16,7 @@ var app = express();
 app.set('view engine', 'ejs');
 
 // My debugging thingie - outputs the current time, method and originating URL of each request.
-app.use(function (req, res, next) {
-	var time = new Date().toTimeString();
-	console.log(time + ":  attempting " + req.method + " on " + req.originalUrl);
-	next();
-});
+
 
 app.use(cookieParser(process.env.SECRET_COOKIE));
 app.use(bodyParser.urlencoded({
@@ -32,13 +29,14 @@ app.use(session({
 
 }));
 
+
+
 app.use(flash());
 passportSetting(app);
 
 app.use(express.static(__dirname + "/public"));
 app.use('/', mainCtrl);
-app.use('/user/', userCtrl);
-app.use('/schools/', schoolCtrl);
+app.use('/auth/', ensureLogin, userCtrl);
 
 
 app.listen(process.env.PORT || 3000, function () {

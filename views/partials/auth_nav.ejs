@@ -8,12 +8,13 @@
 				<span class="icon-bar"></span>
 			</button>
 			<ul class="nav navbar-nav navbar-left">
-				<li class="active"><a class="navbar-brand" href="/">Skool Site</a>
-				</li>
 				<li class="glyphicon glyphicon-education" aria-hidden="true">
 				</li>
 
-
+				<li><a href="/user/myHomepage">My HomePage</a>
+				</li>
+				<li><a href="/user/schools">Find Schools</a>
+				</li>
 			</ul>
 
 		</div>
@@ -23,11 +24,9 @@
 
 				<li><a href="/about">About</a>
 				</li>
-				<li><a href="/signup">Sign Up!</a>
-				</li>
-				<li><a href="/signin">Sign In</a>
-				</li>
 
+				<li><a href="/user/logout">Log Out</a>
+				</li>
 
 			</ul>
 
@@ -37,12 +36,12 @@
 	<!--/.container-fluid -->
 </nav>
 
-	<div class="container">
+<div class="container">
 
-			<div class="row">
-				<div class="col-xs-offset-3 col-xs-6 col-md-offset-4 col-md-4 col-lg-offset-5 col-lg-2 center-block">
-					<% if (locals.messages && locals.messages.info) { %> <span> <%= locals.messages.info %> </span>
-						<% } %>
+	<div class="row">
+		<div class="col-xs-offset-3 col-xs-6 col-md-offset-4 col-md-4 col-lg-offset-5 col-lg-2 center-block">
+			<% if (locals.messages && locals.messages.info) { %> <span> <%= locals.messages.info %> </span>
+				<% } %>
 
-				</div>
-			</div>
+		</div>
+	</div>

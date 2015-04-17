@@ -1,6 +1,8 @@
 var db = require('../models');
 var passport = require('passport');
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcrypt'),
+	var mybug = require("debug");
+
 var LocalStrategy = require('passport-local').Strategy;
 
 passport.use(new LocalStrategy({
