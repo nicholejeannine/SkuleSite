@@ -1,6 +1,4 @@
 var express = require('express'),
-	window.myDebug = require("debug"),
-
 	router = express.Router();
 
 

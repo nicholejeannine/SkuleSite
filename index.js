@@ -36,7 +36,8 @@ passportSetting(app);
 
 app.use(express.static(__dirname + "/public"));
 app.use('/', mainCtrl);
-app.use('/auth/', ensureLogin, userCtrl);
+app.use('/user', userCtrl);
+app.use('/auth/', ensureLogin, authCtrl);
 
 
 app.listen(process.env.PORT || 3000, function () {

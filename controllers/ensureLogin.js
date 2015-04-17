@@ -1,6 +1,5 @@
 var express = require('express'),
 	router = express.Router(),
-	window.myDebug = require("debug"),
 
 	flash = require('express-flash'),
 	session = require('express-session');
