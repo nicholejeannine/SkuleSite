@@ -29,24 +29,24 @@
 						</tr>
 
 						<% schools.forEach(function(school){ %>
-							<tr>
+							<form method="post" action="/auth">
+								<tr>
 
-								<td>
-									<%=school.name %>
+									<td>
+										<span><%=school.name %></span><span><input type="hidden" name="schoolname" value="<%=school.name %>"</span>
 
 
-								</td>
-								<td class="address">
-									<%=school.address%>
-								</td>
-								<td>
-									<%=school.website%>
-								</td>
-								<td>
-									<form method="post" action="/auth/search/<%=school.unitId%>/new">
-										<td>
-											<button type="submit" class="btn btn-primary">Add To My Lists</button>
-										</td>
+									</td>
+									<td class="address">
+										<%=school.address%>
+									</td>
+									<td>
+										<%=school.website%>
+									</td>
+									<td>
+										<button type="submit" id="btnAdd" name="unitId" value="<%=school.unitId%>" class="btn btn-sm btn-primary">Add To My Lists</button>
+							</form>
+							</td>
 							</tr>
 
 							<% }) %>

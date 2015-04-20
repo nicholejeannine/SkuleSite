@@ -13,6 +13,9 @@ module.exports = {
 			unitId: {
 				type: DataTypes.STRING
 			},
+			schoolname: {
+				type: DataTypes.STRING
+			},
 			color: {
 				type: DataTypes.INTEGER
 			}

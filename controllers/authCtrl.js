@@ -8,15 +8,53 @@ var express = require('express'),
 	//var username = req.user['dataValues']['username']; */
 
 router.get('/', function (req, res, next) {
-	var username = req.body.globalUsername;
-	console.log("this  dot user", this.user);
+	var greenList = [],
+		yellowList = [],
+		orangeList = [],
+		greyList = [];
 
-	res.render('auth/myHomepage', {
-		welcomeName: req.user['dataValues']['username'],
-		greenList: [17, 33, 12, 4],
-		yellowList: [4, 5, 3, 4],
-		orangeList: [54, 25, 224, 464],
-		greyList: [3333, 555, 11],
+	var query = {
+		'where': {
+			'username': req.user['dataValues']['username']
+
+		}
+	};
+
+	db.userschool.findAll(query).then(function (schools) {
+		var index = 0;
+		var mySchools = schools.map(function (school, index) {
+			return {
+				unitId: schools[index]['dataValues']['unitId'],
+				schoolname: schools[index]['dataValues']['schoolname'],
+
+				color: schools[index++]['dataValues']['color']
+			}
+		});
+
+
+		mySchools.forEach(function (school) {
+			if (school['color'] == 1) {
+				greyList.push(school);
+			} else if (school['color'] == 2) {
+				yellowList.push(school);
+			} else if (school['color'] == 3) {
+				orangeList.push(school);
+			} else if (school['color'] == 4) {
+				greenList.push(school);
+			}
+		});
+	}).then(function () {
+		console.log('\n\n\n\n\n\n\n\n\n\n', greyList, yellowList, orangeList, greenList, "LISTS!!!!!\n\n\n\n\n\n\n");
+
+		res.render('auth/myHomepage', {
+			values: {
+				welcomeName: req.user['dataValues']['username'],
+				greenList: greenList,
+				yellowList: yellowList,
+				orangeList: orangeList,
+				greyList: greyList
+			}
+		});
 	});
 });
 
@@ -60,18 +98,22 @@ router.get('/search/', function (req, res) {
 	}
 });
 
-router.post('/search/:id/new', function (req, res) {
-	var unitId = req.param.id;
-	var color = 1;
-	var currentUser = session.getUser();
-	console.log(currentUser);
-	db.userschools.create({
-		where: {
-			username: currentUser,
-			unitId: unitId,
-			color: color
-		}
-	});
+router.post('/', function (req, res) {
+	var unitId = req.body.unitId;
+	var schoolname = req.body.schoolname;
+	var username = req.user['dataValues']['username'];
+	db.userschool.findOrCreate({
+			where: {
+				username: username,
+				unitId: unitId,
+				schoolname: schoolname,
+				color: this.color || 1
+			}
+		}).then(function (created) {
+			res.redirect('/auth');
+		})
+		//	});
+		//	res.redirect('/');
 });
 
 

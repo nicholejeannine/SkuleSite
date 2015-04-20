@@ -20,16 +20,16 @@ function doStuff() {
 			}
 		};
 	}
-	// will return an array of all the articles, plus a bunch of other miscellaneous data.  An array of items with data values and not really what we want.  What we want to do is map the articles to get the actual values.
-
-	/*f (q) {
-			db.school.findAll(query).then(function (schools) {
 
 
-				console.log(schools[0]['dataValues']['unitId']);
-
-			});*/
-
+	var query2 = {
+		'where': {
+			'unitId': schools[index]['dataValues']['unitId']
+		}
+	}
+	var name = db.school.findOne(query2).then(function (school) {
+		return school['dataValues']['name'];
+	});
 
 	db.school.findAll(query).then(function (schools) {
 		var index = 0;

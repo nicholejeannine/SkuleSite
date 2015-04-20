@@ -8,6 +8,7 @@ module.exports = function (sequelize, DataTypes) {
 		},
 		username: DataTypes.STRING,
 		unitId: DataTypes.STRING,
+		schoolname: DataTypes.STRING,
 		color: DataTypes.INTEGER
 	}, {
 		timestamps: false,
