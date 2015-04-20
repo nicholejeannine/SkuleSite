@@ -1,32 +1,36 @@
+/* line 1, /Users/Owner/wdi/SkuleSite/public/css/styles.scss */
 html {
-	font-size: 16px;
-}
+  font-size: 16px; }
 
+/* line 5, /Users/Owner/wdi/SkuleSite/public/css/styles.scss */
 body {
-	font-size: 100%;
-	line-height: 1.6;
-	background-color: #03a3a3;
-}
+  font-size: 100%;
+  line-height: 1.6;
+  background-color: #03a3a3; }
 
+/* line 11, /Users/Owner/wdi/SkuleSite/public/css/styles.scss */
 .navbar {
-	font-size: 1.3em;
-	font-family: neuton-cursive, cursive;
-	color: white;
-}
+  font-size: 1.3em;
+  font-family: neuton-cursive, cursive;
+  color: #eee; }
 
+/* line 17, /Users/Owner/wdi/SkuleSite/public/css/styles.scss */
 a.navbar-brand {
-	font-size: 1.6em;
-}
+  font-size: 1.6em; }
 
+/* line 21, /Users/Owner/wdi/SkuleSite/public/css/styles.scss */
 .btn-primary {
-	background-color: #ceaffa;
-	color: #000;
-}
+  background-color: darkviolet;
+  color: #cdecde; }
+  /* line 24, /Users/Owner/wdi/SkuleSite/public/css/styles.scss */
+  .btn-primary:hover {
+    color: #fff; }
 
-.btn-primary:hover {
-	color: #fff;
-}
+/* line 29, /Users/Owner/wdi/SkuleSite/public/css/styles.scss */
+.schoolContainer {
+  color: #222;
+  outline-color: #c6c6c6;
+  outline-width: thick;
+  outline-style: groove; }
 
-.container {
-	color: #222;
-}
+/*# sourceMappingURL=styles.css.map */

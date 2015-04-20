@@ -1,9 +1,9 @@
-var express = require('express');
-var router = express.Router();
+var express = require('express'),
+	mybug = require("debug"),
+	router = express.Router();
 
 // get request made to home page. Response: "here's your generic home page."
 router.get('/', function (req, res) {
-	console.log('index page ' + req.user);
 	res.render('main/index');
 });
 

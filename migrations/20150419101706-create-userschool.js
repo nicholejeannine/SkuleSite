@@ -3,26 +3,19 @@ module.exports = {
 	up: function (migration, DataTypes, done) {
 		migration.createTable("userschools", {
 			id: {
-				allowNull: false,
+				type: DataTypes.INTEGER,
 				autoIncrement: true,
 				primaryKey: true,
-				type: DataTypes.INTEGER
 			},
-			schoolId: {
-				type: DataTypes.INTEGER,
-				references: "users",
-				referencesKey: "id"
+			username: {
+				type: DataTypes.STRING
 			},
-			userId: {
-				type: DataTypes.INTEGER,
-				references: "schools",
-				referencesKey: "unitId"
+			unitId: {
+				type: DataTypes.STRING
 			},
 			color: {
-				type: DataTypes.STRING,
-				allowNull: true,
-				defaultValue: "grey"
-			},
+				type: DataTypes.INTEGER
+			}
 		}).done(done);
 	},
 	down: function (migration, DataTypes, done) {

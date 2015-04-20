@@ -1,16 +1,10 @@
 "use strict";
 module.exports = function (sequelize, DataTypes) {
 	var user = sequelize.define("user", {
-		id: {
-			allowNull: false,
-			autoIncrement: true,
-			primaryKey: true,
-			type: DataTypes.INTEGER
-		},
 		username: {
 			type: DataTypes.STRING,
-			unique: true,
-			allowNull: false,
+			autoIncrement: false,
+			primaryKey: true,
 		},
 		password: {
 			type: DataTypes.STRING,
@@ -19,12 +13,7 @@ module.exports = function (sequelize, DataTypes) {
 	}, {
 		timestamps: false,
 		classMethods: {
-			associate: function (models) {
-				user.belongsToMany(models.school, {
-					as: 'Users',
-					through: 'userschools'
-				})
-			},
+			associate: function (models) {}
 		}
 	});
 	return user;

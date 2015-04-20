@@ -4,10 +4,11 @@ var express = require('express'),
 	userCtrl = require('./controllers/userCtrl.js'),
 	authCtrl = require('./controllers/authCtrl.js'),
 	ensureLogin = require('./controllers/ensureLogin.js'),
-	user = require('./models/user'),
 	bcrypt = require('bcrypt'),
+	mybug = require("debug"),
 	session = require('express-session'),
 	cookieParser = require('cookie-parser'),
+	debug = require('debug'),
 	flash = require('express-flash'),
 	passportSetting = require('./controllers/passportSetting');
 
@@ -26,12 +27,17 @@ app.use(session({
 	resave: true,
 	saveUninitialized: true,
 	secret: process.env.SESSION_SECRET,
-
 }));
-
-
-
 app.use(flash());
+app.use(function (req, res, next) {
+	req.getUser = function () {
+		console.log("session is", req.session.user);
+		return req.session.user || false;
+	}
+	next();
+})
+
+
 passportSetting(app);
 
 app.use(express.static(__dirname + "/public"));

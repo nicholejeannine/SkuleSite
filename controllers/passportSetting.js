@@ -44,13 +44,13 @@ passport.use(new LocalStrategy({
 ));
 
 passport.serializeUser(function (user, done) {
-	done(null, user.id);
+	done(null, user.username);
 });
 
-passport.deserializeUser(function (id, done) {
+passport.deserializeUser(function (username, done) {
 	db.user.findOne({
 			where: {
-				id: id
+				username: username
 			}
 		})
 		.then(function (user) {

@@ -1,8 +1,9 @@
 var express = require('express'),
 	router = express.Router(),
-
+	mybug = require("debug"),
 	flash = require('express-flash'),
-	session = require('express-session');
+	db = require('../models')
+session = require('express-session');
 
 
 var ensureLogin = function (req, res, next) {

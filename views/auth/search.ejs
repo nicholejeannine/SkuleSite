@@ -1,0 +1,58 @@
+<% include ../partials/header.ejs%>
+	<% include ../partials/auth_nav.ejs%>
+
+
+		<div class="row">
+
+			<div class="col-xs-offset-3 col-xs-6 col-md-offset-4 col-md-4 col-lg-offset-5 col-lg-2 center-block">
+
+
+				<form method="get">
+					<h4>Search Schools By Name:</h4>
+					<input name="q" value="<%= searchTerm %>" type="text" class="form-control" placeholder="School Name">
+					<input type="submit" value="Search" class="btn btn-primary btn-sm">
+					<% if(searchTerm){ %>
+						<a href="/auth/search">Clear Search</a>
+						<% } %>
+				</form>
+			</div>
+		</div>
+		<div class="row">
+
+			<div class="col-xs-offset-3 col-xs-6 col-md-offset-4 col-md-4 col-lg-offset-5 col-lg-2 center-block">
+
+				<% if (schools) {%>
+					<table class="table table-responsive table-bordered">
+						<tr>
+							<th>Search Results:</th>
+							<th></th>
+						</tr>
+
+						<% schools.forEach(function(school){ %>
+							<tr>
+
+								<td>
+									<%=school.name %>
+
+
+								</td>
+								<td class="address">
+									<%=school.address%>
+								</td>
+								<td>
+									<%=school.website%>
+								</td>
+								<td>
+									<form method="post" action="/auth/search/<%=school.unitId%>/new">
+										<td>
+											<button type="submit" class="btn btn-primary">Add To My Lists</button>
+										</td>
+							</tr>
+
+							<% }) %>
+
+					</table>
+					<% } %>
+
+			</div>
+			<% include ../partials/footer.ejs%>
