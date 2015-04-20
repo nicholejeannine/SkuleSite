@@ -1,36 +1,90 @@
-/* line 1, /Users/Owner/wdi/SkuleSite/public/css/styles.scss */
+/* line 2, /Users/Owner/wdi/SkuleSite/public/css/styles.scss */
 html {
-  font-size: 16px; }
-
-/* line 5, /Users/Owner/wdi/SkuleSite/public/css/styles.scss */
-body {
-  font-size: 100%;
-  line-height: 1.6;
-  background-color: #03a3a3; }
+  font-size: 16px;
+  background-size: cover;
+  font-family: 'Montserrat', sans-serif;
+  line-height: 1.6; }
 
 /* line 11, /Users/Owner/wdi/SkuleSite/public/css/styles.scss */
+body {
+  font-size: 100%;
+  background-color: #03a3a3; }
+
+/* line 16, /Users/Owner/wdi/SkuleSite/public/css/styles.scss */
 .navbar {
   font-size: 1.3em;
-  font-family: neuton-cursive, cursive;
+  font-family: cursive;
+  color: #eee;
+  height: 3em; }
+
+/* line 25, /Users/Owner/wdi/SkuleSite/public/css/styles.scss */
+.navbar-right {
+  font-weight: 800; }
+
+/* line 32, /Users/Owner/wdi/SkuleSite/public/css/styles.scss */
+h1 {
+  text-align: center;
+  font-size: 3.4em;
+  font-family: cursive;
   color: #eee; }
 
-/* line 17, /Users/Owner/wdi/SkuleSite/public/css/styles.scss */
-a.navbar-brand {
-  font-size: 1.6em; }
+/* line 38, /Users/Owner/wdi/SkuleSite/public/css/styles.scss */
+h2 {
+  text-align: center;
+  margin-bottom: 3%; }
 
-/* line 21, /Users/Owner/wdi/SkuleSite/public/css/styles.scss */
+/* line 43, /Users/Owner/wdi/SkuleSite/public/css/styles.scss */
+h3 {
+  text-align: center; }
+
+/* line 47, /Users/Owner/wdi/SkuleSite/public/css/styles.scss */
+h4 {
+  text-align: center;
+  color: #111;
+  margin-bottom: 2%; }
+
+/* line 52, /Users/Owner/wdi/SkuleSite/public/css/styles.scss */
+p {
+  font-size: 1em;
+  margin-top: 1%;
+  padding: 1% 4%;
+  text-align: justify; }
+  /* line 58, /Users/Owner/wdi/SkuleSite/public/css/styles.scss */
+  p.titlePage {
+    width: 50%;
+    color: #eee;
+    text-align: center; }
+
+/* line 66, /Users/Owner/wdi/SkuleSite/public/css/styles.scss */
+a {
+  color: #c6c6c6; }
+  /* line 69, /Users/Owner/wdi/SkuleSite/public/css/styles.scss */
+  a.navbar-brand {
+    font-size: 1.6em;
+    background-color: #03a3a3;
+    height: inherit; }
+
+/* line 78, /Users/Owner/wdi/SkuleSite/public/css/styles.scss */
 .btn-primary {
-  background-color: darkviolet;
+  background-color: #a582d3;
   color: #cdecde; }
-  /* line 24, /Users/Owner/wdi/SkuleSite/public/css/styles.scss */
+  /* line 81, /Users/Owner/wdi/SkuleSite/public/css/styles.scss */
   .btn-primary:hover {
     color: #fff; }
 
-/* line 29, /Users/Owner/wdi/SkuleSite/public/css/styles.scss */
-.schoolContainer {
-  color: #222;
-  outline-color: #c6c6c6;
-  outline-width: thick;
-  outline-style: groove; }
+/* line 86, /Users/Owner/wdi/SkuleSite/public/css/styles.scss */
+.schoolList {
+  border: 1px solid #eee;
+  width: 142px;
+  min-height: 20px;
+  list-style-type: none;
+  margin: 0;
+  padding: 5px 0 0 0; }
+  /* line 93, /Users/Owner/wdi/SkuleSite/public/css/styles.scss */
+  .schoolList li {
+    margin: 0 5px 5px 5px;
+    padding: 5px;
+    font-size: 1.2em;
+    width: 120px; }
 
 /*# sourceMappingURL=styles.css.map */

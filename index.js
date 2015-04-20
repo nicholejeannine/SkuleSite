@@ -49,3 +49,5 @@ app.use('/auth/', ensureLogin, authCtrl);
 app.listen(process.env.PORT || 3000, function () {
 	console.log("Server listening.");
 });
+
+// TODO: 
