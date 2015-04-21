@@ -21,12 +21,13 @@ $(function () {
 		$("ul.list4").sortable({
 			connectWith: ["ul.list1", "ul.list2", "ul.list3"]
 		});
+		$('.draggable').on('click', function (event) {
+			$(this).fadeOut();
+		})
 	});
 });
 //works!
-// $('.draggable').on('click', function (event) {
-// 	$(this).fadeOut();
-// })
+// 
 
 
 /*("#sortable").sortable({

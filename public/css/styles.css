@@ -109,4 +109,10 @@ a.navbar-brand {
 	font-size: 1.2em;
 	width: 350px;
 }
+
+.glyphicon-remove {
+	font-size: 12px;
+	padding: 0 5px 5px 5px;
+	color: red;
+}
 /*# sourceMappingURL=styles.css.map */

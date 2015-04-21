@@ -57,9 +57,7 @@ router.get('/', function (req, res, next) {
 	});
 });
 
-router.get('/about', function (req, res) {
-	res.render('/main/about');
-});
+
 
 router.get('/search/', function (req, res) {
 	var query = {};
