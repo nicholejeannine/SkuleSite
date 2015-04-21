@@ -44,7 +44,6 @@ router.get('/', function (req, res, next) {
 			}
 		});
 	}).then(function () {
-		console.log('\n\n\n\n\n\n\n\n\n\n', greyList, yellowList, orangeList, greenList, "LISTS!!!!!\n\n\n\n\n\n\n");
 
 		res.render('auth/myHomepage', {
 			values: {
