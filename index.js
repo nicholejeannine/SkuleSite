@@ -2,7 +2,6 @@ var express = require('express');
 var db = require('./models');
 var passportSettings = require('./controllers/passportSettings');
 var debug = require('debug');
-var LocalStrategy = require('passport-local');
 var flash = require('connect-flash');
 var mainCtrl = require('./controllers/mainCtrl');
 var usersCtrl = require('./controllers/usersCtrl');

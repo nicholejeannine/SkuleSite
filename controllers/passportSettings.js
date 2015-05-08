@@ -1,9 +1,6 @@
-var express = require('express');
-var db = require('./models');
+var db = require('../models');
 var passport = require('passport');
 var LocalStrategy = require('passport-local');
-var flash = require('connect-flash');
-
 
 
 // creates some authentication logic
@@ -19,12 +16,14 @@ passport.use(new LocalStrategy({
         }).then(function(user) {
             if (user) {
                 user.checkPassword(password, function(err, result) {
-                    if (err) return done(err);
+                    if (err) {
+                        return done(err);
+                    }
                     if (result) {
                         done(null, user.get());
                     } else {
                         done(null, false, {
-                            message: 'Invalid username and password combination. Please sign up or reenter your password.';
+                            message: 'Invalid username and password combination. Please sign up or reenter your password.'
 
                         });
                     }
@@ -49,5 +48,8 @@ passport.deserializeUser(function(id, done) {
         done(null, user.get());
     }).catch(done);
 });
-app.use(passport.initialize());
-app.use(passport.session());
+
+module.exports = function(app) {
+    app.use(passport.initialize());
+    app.use(passport.session());
+};

@@ -6,8 +6,6 @@ var passport = require('passport');
 var db = require('../models');
 
 
-// create application/json parser
-var jsonParser = bodyParser.json()
 
 // create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({
@@ -31,7 +29,14 @@ router.get('/register', function(req, res) {
 
 // posts to login page to request info about a returning user 
 
-router.post('/login', urlencodedParser, function(req, res) {
+router.post('/login', urlencodedParser, function(req, res, next) {
+    // makes sure both password and username are filled out.
+    if (!req.body.password || !req.body.username) {
+        req.flash('warning', 'Please enter username and password to create an account');
+        next();
+    }
+
+    var username = req.body.username;
     // Some logic here to create a new user or not
     passport.authenticate('local', {
             badRequestMessage: 'You must enter e-mail and password.'
@@ -41,7 +46,7 @@ router.post('/login', urlencodedParser, function(req, res) {
                 req.login(user, function(err) {
                     if (err) throw err;
                     req.flash('success', 'welcome back!');
-                    res.render('users/myHomepage');
+                    res.render('users/' + username + '/myHomepage');
                 });
             } else {
                 var errorMsg = info && info.message ? info.message : 'Unknown error.';
@@ -52,13 +57,27 @@ router.post('/login', urlencodedParser, function(req, res) {
 });
 
 // posts to sign up and request a newly created user
-router.post('/register', urlencodedParser, function(req, res) {
+router.post('/register', urlencodedParser, function(req, res, next) {
+    // makes sure both password and username are filled out.
     if (!req.body.password || !req.body.username) {
         req.flash('warning', 'Please enter username and password to create an account');
-        next();
-    } else if (req.body.password.length < 5) {
+        res.render('auth/register');
+    }
+    // makes sure validation password is also filled out
+    if (!req.body.passwordCheck) {
+        req.flash('warning', 'Please verify your password.');
+        res.render('auth/register');
+    }
+    // ensures password is at least 5 characters.
+    if (req.body.password.length < 5) {
         req.flash('danger', 'Please try a little bit harder to think of a secure password.  You must use at least 5 characters.');
-        next();
+        res.render('auth/register');
+    }
+
+    // checks that email fields match
+    if (req.body.password !== req.body.passwordCheck) {
+        req.flash('warning', 'Password fields do not match. Please re-enter your password.');
+        res.render('auth/register');
     }
 
 
@@ -77,7 +96,7 @@ router.post('/register', urlencodedParser, function(req, res) {
     }).spread(function(user, created) {
         if (created) {
             req.flash('Welcome, ' + userData.username);
-            res.redirect('/users/');
+            res.redirect('/users/' + req.body.username + '/myHomepage');
         } else {
             req.flash('danger', 'that username already exists.');
             res.redirect('/auth/register');
@@ -100,7 +119,7 @@ router.post('/register', urlencodedParser, function(req, res) {
     })
 
     // assuming new user is created, send them over  to the signed-in homepage
-    res.redirect('/users');
+    // res.redirect('/users');
 });
 
 // a route to logout the user and redirect them to the home page.
