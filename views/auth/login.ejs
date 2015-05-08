@@ -1,0 +1,36 @@
+<% include ../partials/header.ejs%>
+<% include ../partials/navbar.ejs%>
+
+
+
+<div class="row">
+	<div class="col-xs-offset-3 col-xs-6 col-md-offset-4 col-md-4 col-lg-offset-5 col-lg-2">
+		<h1>Log In!</h1>
+		<hr>
+		<% include ../partials/alerts.ejs %>
+		<form class="form" method="post" action="/auth/login">
+			<div class="form-group">
+				<label for="username">Your Account Name:</label>
+				<input name="username" type="text" class="form-control" id="username" placeholder="Enter a user name:">
+			</div>
+			<div class="form-group">
+				<label for="password">Password</label>
+				<input type="password" class="form-control" name="password" id="password" placeholder="Password">
+			</div>
+
+			<input type="submit" value="login In" class="btn btn-primary">
+		</form>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-offset-3 col-xs-6 col-md-offset-4 col-md-4 col-lg-offset-5 col-lg-2">
+
+		<div class="form-group">
+			<h3>No Account?</h3>
+
+			<a href="/auth/register" id="registerSubmit" class="btn btn-warning">Register Now!</a> </div>
+		</div>
+	</div>
+
+
+	<% include ../partials/footer.ejs%>

@@ -1,0 +1,31 @@
+<% include ../partials/header.ejs%>
+<% include ../partials/navbar.ejs%>
+
+
+
+<div class="row">
+	<div class="col-xs-offset-3 col-xs-6 col-md-offset-4 col-md-4 col-lg-offset-5 col-lg-2">
+		<h1>Sign Up!</h1>
+		<hr>
+		<% include ../partials/alerts.ejs %>
+		<form class="form" method="post" action="/auth/register">
+			<div class="form-group">
+				<label for="username">Choose A Unique User Name:</label>
+				<input name="username" type="text" class="form-control" placeholder="Enter a user name:">
+			</div>
+			<div id="passwordVerify">
+				<div class="form-group">
+					<label for="password">Password</label>
+					<input name="password" type="password" class="form-control" id="password" placeholder="Choose a Password">
+				</div>
+				<div class="form-group">
+					<label for="passwordCheck">Password:</label>
+					<input type="password" class="form-control" id="passwordCheck" placeholder="Please Verify Your Password">
+				</div>
+			</div>
+			<input id="registerSubmit" type="submit" class="btn btn-default" value="Sign Up Now!">
+		</form>
+	</div>
+</div>
+
+<% include ../partials/footer.ejs%>

@@ -1,30 +1,15 @@
-var express = require('express'),
-	mybug = require("debug"),
-	router = express.Router();
+var express = require('express');
+var router = express.Router();
 
-// get request made to home page. Response: "here's your generic home page."
-router.get('/', function (req, res) {
+// Retrieves the homepage to show to the viewer.
+router.get('/', function(req, res){
 	res.render('main/index');
 });
 
-//GET /about  page is requested, respond with the static "about" page.
-router.get('/about', function (req, res) {
+// Retrieves the about page to show to the viewer.
+router.get('/about', function(req,res){
 	res.render('main/about');
 });
 
-// signin page is requested, respond with the signin page.
-router.get('/signin', function (req, res) {
-	res.render('main/signin');
-});
-
-
-//sign-up page is requested, respond with the signup page.
-router.get('/signup', function (req, res) {
-	res.render('main/signup');
-});
-
-
-
-
-
 module.exports = router;
+

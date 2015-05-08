@@ -1,9 +1,7 @@
-<div class="row">
-	<div class="col-md-12 center-block">
-
-		<% if(typeof locals.alerts !='undefined' ){ %%>
-
-			<h4 class="alert"><%locals.alerts %></h4>
-			<% } %>
-	</div>
-</div>
+<% if(typeof alerts !== 'undefined'){ %>
+<% for(key in alerts){ %>
+<% alerts[key].forEach(function(thisMsg){ %>
+<div class="alert alert-<%= key %>"><%= thisMsg %></div>
+<% }); %>
+<% } %>
+<% } %>

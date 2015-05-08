@@ -1,53 +1,63 @@
-var express = require('express'),
-	bodyParser = require('body-parser'),
-	mainCtrl = require('./controllers/mainCtrl.js'),
-	userCtrl = require('./controllers/userCtrl.js'),
-	authCtrl = require('./controllers/authCtrl.js'),
-	ensureLogin = require('./controllers/ensureLogin.js'),
-	bcrypt = require('bcrypt'),
-	mybug = require("debug"),
-	session = require('express-session'),
-	cookieParser = require('cookie-parser'),
-	debug = require('debug'),
-	flash = require('express-flash'),
-	passportSetting = require('./controllers/passportSetting');
+var express = require('express');
+var db = require('./models');
+var passportSettings = require('./controllers/passportSettings');
+var debug = require('debug');
+var LocalStrategy = require('passport-local');
+var flash = require('connect-flash');
+var mainCtrl = require('./controllers/mainCtrl');
+var usersCtrl = require('./controllers/usersCtrl');
+var authCtrl = require('./controllers/authCtrl');
+var session = require('express-session');
+var FileStore = require('session-file-store')(session);
+var NODE_ENV = process.env.NODE_ENV || 'development';
+var BASE_URL = (NODE_ENV === 'production') ? 'https://skulesite.herokuapps.com' : 'http://localhost:3000';
+var ensureLogin = require('./controllers/ensureLogin');
 
+
+// creates an instance of express
 var app = express();
 
+// sets express templates to use ejs
 app.set('view engine', 'ejs');
 
-// My debugging thingie - outputs the current time, method and originating URL of each request.
 
-
-app.use(cookieParser(process.env.SECRET_COOKIE));
-app.use(bodyParser.urlencoded({
-	extended: false
-}));
+// loads session middleware
 app.use(session({
-	resave: true,
-	saveUninitialized: true,
-	secret: process.env.SESSION_SECRET,
+    store: new FileStore,
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true
 }));
-app.use(flash());
-app.use(function (req, res, next) {
-	req.getUser = function () {
-		console.log("session is", req.session.user);
-		return req.session.user || false;
-	}
-	next();
-})
 
 
-passportSetting(app);
+//custom middleware - is user logged in (stolen from Lenny)
+app.use(function(req, res, next) {
+    req.getUser = function() {
+        return req.session.user || false;
+    }
 
-app.use(express.static(__dirname + "/public"));
-app.use('/', mainCtrl);
-app.use('/user', userCtrl);
-app.use('/auth/', ensureLogin, authCtrl);
-
-
-app.listen(process.env.PORT || 3000, function () {
-	console.log("Server listening.");
+    //trigger next middleware
+    next();
 });
 
-// TODO: 
+// sets up flash messages
+app.use(flash());
+app.use(function(req, res, next) {
+    res.locals.alerts = req.flash();
+    next();
+});
+
+// loads passport settings into app
+passportSettings(app);
+
+// loads routes
+// loads public static directory
+app.use(express.static(__dirname + '/public'));
+app.use('/', mainCtrl);
+app.use('/auth', authCtrl);
+app.use('/users/', ensureLogin, usersCtrl);
+
+// finally, tells the server to listen for connections
+app.listen(process.env.PORT || 3000, function() {
+    console.log("Server listening.");
+});
