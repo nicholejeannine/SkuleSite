@@ -1,9 +1,8 @@
-var bcrypt = require('bcrypt');
 var express = require('express');
-var bodyParser = require('body-parser');
 var router = express.Router();
+var bcrypt = require('bcrypt');
+var bodyParser = require('body-parser');
 var passport = require('passport');
-var debug = require('debug');
 var db = require('../models');
 
 
@@ -23,6 +22,8 @@ router.get('/', function(req, res) {
 
 // gets the register page
 router.get('/register', function(req, res) {
+
+
     res.render('auth/register');
 
 });
@@ -52,6 +53,15 @@ router.post('/login', urlencodedParser, function(req, res) {
 
 // posts to sign up and request a newly created user
 router.post('/register', urlencodedParser, function(req, res) {
+    if (!req.body.password || !req.body.username) {
+        req.flash('warning', 'Please enter username and password to create an account');
+        next();
+    } else if (req.body.password.length < 5) {
+        req.flash('danger', 'Please try a little bit harder to think of a secure password.  You must use at least 5 characters.');
+        next();
+    }
+
+
     var userQuery = {
         username: req.body.username
     };
@@ -60,12 +70,13 @@ router.post('/register', urlencodedParser, function(req, res) {
         password: req.body.password
     };
 
+    // if validation succeeds, check the database for existing user by same name.
     db.user.findOrCreate({
         where: userQuery,
         defaults: userData
     }).spread(function(user, created) {
         if (created) {
-            req.flash('Welcome!');
+            req.flash('Welcome, ' + userData.username);
             res.redirect('/users/');
         } else {
             req.flash('danger', 'that username already exists.');

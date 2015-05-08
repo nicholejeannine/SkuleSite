@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var router = express.Router();
 var db = require('../models');
-
+var session = require('express-session');
 
 
 //gets the request for the user's homepage, and renders it
