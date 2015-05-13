@@ -3,20 +3,23 @@ var bodyParser = require('body-parser');
 var router = express.Router();
 var db = require('../models');
 var session = require('express-session');
+var ensureLoggedIn = require('connect-ensure-login');
 
-// if no user is specified, have the request default back to login pgae.
-router.get('/', function(req, res) {
-    res.redirect('/auth/login');
+router.use('/*', function(req, res, next) {
+    ensureLoggedIn.ensureLoggedIn;
+    next();
 });
 
-//gets the request for the user's homepage, and renders it
-router.get('/:username', function(req, res) {
-    res.render('users/myHomepage');
+
+router.get('/', function(req, res) {
+    res.render('users/myHomepage', {
+        username: req.session.user
+    });
 });
 
 
 // gets the request for the search for a school page, and renders it
-router.get('/:username/search', function(req, res) {
+router.get('/search', function(req, res) {
     // rendering of regular search page:
     // res.render('users/search');
     // rendering of advanced search page:
@@ -25,14 +28,14 @@ router.get('/:username/search', function(req, res) {
 
 
 //gets the request for results from the search page, and renders it.
-router.get('/:username/show', function(req, res) {
+router.get('/show', function(req, res) {
     // define q as the user's search request query thingie.
     // display the results for one search.
     res.render('users/show');
 })
 
 // gets the request for the detailed results for their school, and displays that
-router.get('/:username/show/:id/details', function(req, res) {
+router.get('/show/:id/details', function(req, res) {
     res.render('users/showMore');
 });
 

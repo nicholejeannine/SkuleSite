@@ -4,123 +4,128 @@ var bcrypt = require('bcrypt');
 var bodyParser = require('body-parser');
 var passport = require('passport');
 var db = require('../models');
-
+var session = require('express-session');
+var flash = require('connect-flash');
+var ensureLogin = require('connect-ensure-login');
 
 
 // create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({
     extended: false
-})
+});
 
+
+router.get('/', function(req, res) {
+    res.redirect('auth/login');
+});
 
 // gets the login page
-router.get('/', function(req, res) {
+router.get('/login', function(req, res) {
     res.render('auth/login');
 });
 
 // gets the register page
 router.get('/register', function(req, res) {
-
-
     res.render('auth/register');
 
 });
 
 
-// posts to login page to request info about a returning user 
+// login route 
 
-router.post('/login', urlencodedParser, function(req, res, next) {
-    // makes sure both password and username are filled out.
-    if (!req.body.password || !req.body.username) {
-        req.flash('warning', 'Please enter username and password to create an account');
-        next();
-    }
+router.post('/login', urlencodedParser, passport.authenticate('local', {
+    successReturnToOrRedirect: '/users',
+    failureRedirect: '/auth/login'
+}));
 
-    var username = req.body.username;
-    // Some logic here to create a new user or not
-    passport.authenticate('local', {
-            badRequestMessage: 'You must enter e-mail and password.'
-        },
-        function(err, user, info) {
-            if (user) {
-                req.login(user, function(err) {
-                    if (err) throw err;
-                    req.flash('success', 'welcome back!');
-                    res.render('users/' + username + '/myHomepage');
-                });
-            } else {
-                var errorMsg = info && info.message ? info.message : 'Unknown error.';
-                req.flash('danger', errorMsg);
-                res.redirect('/auth');
-            }
-        })(req, res);
-});
+// router.post('/login', urlencodedParser, function(req, res, next) {
+//     var username = req.body.username;
+//     // Some logic here to create a new user or not
+//     passport.authenticate('local', {
+//             badRequestMessage: 'You must enter e-mail and password.'
+//         },
+//         function(err, user, info) {
+//             if (user) {
+//                 req.login(user, function(err) {
+//                     if (err) {
+//                         throw err;
+//                     }
+//                     res.render('users/', ({
+//                         username: username
+//                     }));
+//                 })
+//             } else {
+//                 var errorMsg = info && info.message ? info.message : 'Unknown error.';
+
+//                 res.render('auth/login', {
+//                     alerts: req.flash('danger', errorMsg)
+//                 });
+//             }
+//         });
+// });
 
 // posts to sign up and request a newly created user
 router.post('/register', urlencodedParser, function(req, res, next) {
     // makes sure both password and username are filled out.
     if (!req.body.password || !req.body.username) {
-        req.flash('warning', 'Please enter username and password to create an account');
+        req.flash('warning', 'Please choose a name and password to create an account.');
         res.render('auth/register');
-    }
-    // makes sure validation password is also filled out
-    if (!req.body.passwordCheck) {
+    } else if (req.body.password.length < 5) {
+        req.flash('warning', 'Please try a little bit harder to think of a secure password.  You must use at least 5 characters.');
+        res.render('auth/register');
+    } else if (!req.body.passwordCheck) {
         req.flash('warning', 'Please verify your password.');
         res.render('auth/register');
-    }
-    // ensures password is at least 5 characters.
-    if (req.body.password.length < 5) {
-        req.flash('danger', 'Please try a little bit harder to think of a secure password.  You must use at least 5 characters.');
-        res.render('auth/register');
-    }
-
-    // checks that email fields match
-    if (req.body.password !== req.body.passwordCheck) {
+    } else if (req.body.password.toString() !== req.body.passwordCheck.toString()) {
         req.flash('warning', 'Password fields do not match. Please re-enter your password.');
         res.render('auth/register');
-    }
+    } else {
+
+        req.session.username = req.body.username;
+        var userQuery = {
+            username: req.body.username
+        };
+        var userData = {
+            username: req.body.username,
+            password: req.body.password
+        };
 
 
-    var userQuery = {
-        username: req.body.username
-    };
-    var userData = {
-        username: req.body.username,
-        password: req.body.password
-    };
-
-    // if validation succeeds, check the database for existing user by same name.
-    db.user.findOrCreate({
-        where: userQuery,
-        defaults: userData
-    }).spread(function(user, created) {
-        if (created) {
-            req.flash('Welcome, ' + userData.username);
-            res.redirect('/users/' + req.body.username + '/myHomepage');
-        } else {
-            req.flash('danger', 'that username already exists.');
-            res.redirect('/auth/register');
-        }
-    }).catch(function(error) {
-        if (error) {
-            if (Array.isArray(error.errors)) {
-                error.errors.forEach(function(errorItem) {
-                    req.flash('danger', errorItem.message);
-                });
-            } else {
-                req.flash('danger', 'unknown error');
-                console.log('unknown error occurred during user registration :', error);
+        console.log("Req.session.username = " + req.session.username)
+            // if validation succeeds, check the database for existing user by same name.
+        db.user.findOrCreate({
+            where: userQuery,
+            defaults: userData
+        }).spread(function(user, created) {
+            if (user) {
+                req.flash('danger', 'Username already exists.');
+                res.redirct('/auth/login');
             }
-        } else {
-            req.flash('danger', 'unknown error');
-            console.log('error, but no error ...');
-        }
-        res.redirect('/auth/register');
-    })
 
-    // assuming new user is created, send them over  to the signed-in homepage
-    // res.redirect('/users');
+            if (created) {
+                res.render('users/', {
+                    username: username
+                });
+            }
+        }).catch(function(error) {
+            if (error) {
+                if (Array.isArray(error.errors)) {
+                    error.errors.forEach(function(errorItem) {
+                        req.flash('danger', errorItem.message);
+                    });
+                } else {
+                    req.flash('danger', error.message);
+                }
+                res.redirect('/');
+
+            } else {
+                req.flash('danger', 'unknown error occurred during user registration.');
+                res.redirect('/');
+            };
+        });
+    }
 });
+
 
 // a route to logout the user and redirect them to the home page.
 router.get('/logout', function(req, res) {
