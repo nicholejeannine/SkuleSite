@@ -3,22 +3,42 @@ var bodyParser = require('body-parser');
 var router = express.Router();
 var db = require('../models');
 var session = require('express-session');
-var ensureLoggedIn = require('connect-ensure-login');
+var passport = require('passport');
+var passportLocal = require('passport-local');
+var chalk = require('chalk');
 
-router.use('/*', function(req, res, next) {
-    ensureLoggedIn.ensureLoggedIn;
+// protects the route by verifying that the current user is authorized to view the current page
+router.use(function(req,res,next){
+ if (req.session.passport.user.username) {
+    console.log(chalk.white.bold.underline("Value of req.session.passport.user.id: " + (req.session.passport.user.id || "false")));
+    console.log(chalk.white.bold.underline("Value of req.session.passport.user.username: " + (req.session.passport.user.username || "false")));
     next();
+} else {
+    req.flash("danger", "you must be logged in in order to do that!");
+    res.redirect('/auth/login');
+}
 });
 
-
-router.get('/', function(req, res) {
+// hooray for route chaining!!
+router.route('/').get(function(req, res){
     res.render('users/myHomepage', {
-        username: req.session.user
+        username: req.session.passport.user.username
     });
+}).post(function(req, res) {
+    // some logic for adding a new school to the user's favorites. Then reoute them back to the search page.
+    res.redirect('/users')
+}).put(function(req, res) {
+    // some logic to edit the stuff on the user's homepage.
+    res.redirect('/users');
+});  
+
+router.delete('/:id', function(req, res) {
+ // some logic to remove school from users favorites in the database.
+ res.redirect('/users');
 });
 
 
-// gets the request for the search for a school page, and renders it
+// displays the blank "search for a school" page
 router.get('/search', function(req, res) {
     // rendering of regular search page:
     // res.render('users/search');
@@ -27,35 +47,19 @@ router.get('/search', function(req, res) {
 });
 
 
-//gets the request for results from the search page, and renders it.
+// displays search results after initial search - will return all matches as clickable links.
 router.get('/show', function(req, res) {
     // define q as the user's search request query thingie.
     // display the results for one search.
     res.render('users/show');
 })
 
-// gets the request for the detailed results for their school, and displays that
-router.get('/show/:id/details', function(req, res) {
+// displays the "more details" page a link has been clicked.
+router.get('/show/:id', function(req, res) {
     res.render('users/showMore');
 });
 
 
-// a route to post a new favorite school
-router.post('/', function(req, res) {
-    // some logic for adding a new school to the user's favorites. Then reoute them back to the search page.
-    res.redirect('/users/:username')
-});
 
-
-// a route to edit stuff on the user's homepage.
-router.put('/', function(req, res) {
-
-    // some logic to edit the stuff on the user's homepage.
-    res.redirect('/');
-});
-
-router.delete('/:id', function(req, res) {
-    res.redirect('users');
-});
 
 module.exports = router;

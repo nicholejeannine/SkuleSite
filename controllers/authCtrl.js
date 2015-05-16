@@ -7,6 +7,7 @@ var db = require('../models');
 var session = require('express-session');
 var flash = require('connect-flash');
 var ensureLogin = require('connect-ensure-login');
+var chalk = require('chalk');
 
 
 // create application/x-www-form-urlencoded parser
@@ -93,44 +94,50 @@ router.post('/register', urlencodedParser, function(req, res, next) {
 
         console.log("Req.session.username = " + req.session.username)
             // if validation succeeds, check the database for existing user by same name.
-        db.user.findOrCreate({
-            where: userQuery,
-            defaults: userData
-        }).spread(function(user, created) {
-            if (user) {
-                req.flash('danger', 'Username already exists.');
-                res.redirct('/auth/login');
-            }
-
-            if (created) {
-                res.render('users/', {
-                    username: username
-                });
-            }
-        }).catch(function(error) {
-            if (error) {
-                if (Array.isArray(error.errors)) {
-                    error.errors.forEach(function(errorItem) {
-                        req.flash('danger', errorItem.message);
-                    });
-                } else {
-                    req.flash('danger', error.message);
+            db.user.findOrCreate({
+                where: userQuery,
+                defaults: userData
+            }).spread(function(user, created) {
+                if (user) {
+                    req.flash('danger', 'Username already exists.');
+                    res.redirct('/auth/login');
                 }
-                res.redirect('/');
 
-            } else {
-                req.flash('danger', 'unknown error occurred during user registration.');
-                res.redirect('/');
-            };
-        });
-    }
-});
+                if (created) {
+                    res.render('users/', {
+                        username: username
+                    });
+                }
+            }).catch(function(error) {
+                if (error) {
+                    if (Array.isArray(error.errors)) {
+                        error.errors.forEach(function(errorItem) {
+                            req.flash('danger', errorItem.message);
+                        });
+                    } else {
+                        req.flash('danger', error.message);
+                    }
+                    res.redirect('/');
 
+                } else {
+                    req.flash('danger', 'unknown error occurred during user registration.');
+                    res.redirect('/');
+                };
+            });
+        }
+    });
 
 // a route to logout the user and redirect them to the home page.
 router.get('/logout', function(req, res) {
-    delete req.session.user;
+    delete req.session.passport.user;
+    req.session.destroy(function(err) {
+        console.log(chalk.red.underline(err));
+    });
+    req.logout();
+
+
     res.redirect('/');
-})
+
+});
 
 module.exports = router;

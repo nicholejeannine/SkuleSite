@@ -10,47 +10,74 @@ var session = require('express-session');
 var FileStore = require('session-file-store')(session);
 var NODE_ENV = process.env.NODE_ENV || 'development';
 var BASE_URL = (NODE_ENV === 'production') ? 'https://skulesite.herokuapps.com' : 'http://localhost:3000';
-var isAuth = require('connect-ensure-login');
+
+//var ensureLoggedIn = require('connect-ensure-login');
+//var cookieParser = require('cookie-parser');
+// TODO: GET RID OF CHALK AND SASS-STREAM BELOW
+var sass = require('sass-stream');
+var chalk = require('chalk');
+
+
 // creates an instance of express
 var app = express();
-
 
 // sets express templates to use ejs
 app.set('view engine', 'ejs');
 
-app.use(function(err, req, res, next) {
-    if (err) console.log(err);
-    console.log("Request object: " + req.path + " , " + req.url + " , " + req.method);
-})
-
 // loads session middleware
 app.use(session({
-    store: new FileStore,
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: true
+	store: new FileStore,
+	secret: process.env.SESSION_SECRET,
+	resave: false,
+	saveUninitialized: true,
+	cookie: {
+		maxAge: 60000
+	}
 }));
 
 
 // sets up flash messages
 app.use(flash());
 app.use(function(req, res, next) {
-    res.locals.alerts = req.flash();
-    next();
+	res.locals.alerts = req.flash();
+	next();
 });
+
+
 
 // loads passport settings into app
 passportSettings(app);
 
-// loads routes
+var ensureLogin = function(req, res, next) {
+	if (req.isAuthenticated()) {
+		next();
+	} else {
+		//ensure an empty passport object with no user, since no user is authenticated
+		req.session.passport = {};
+		res.render('auth/login');
+	}
+};
+
 // loads public static directory
 app.use(express.static(__dirname + '/public'));
+
+//debugging middleware for sessions
+//TODO : DELETE THIS ENTIRE BLOCK AFTER /AUTH and /USERS routes are good!
+app.use(function(req, res, next){
+	console.log(chalk.white.bold.underline("is user authenticated? " + req.isAuthenticated()));
+	console.log(chalk.white.bold.underline("Session Object keys at route path " + req.url + ": " + Object.keys(req.session)));
+	console.log(chalk.white.bold.underline("Passport (from session) Object keys at route path " + req.url + ": " + Object.keys(req.session.passport)));
+	next();
+
+});
+
+// loads routes
 app.use('/', mainCtrl);
 app.use('/auth', authCtrl);
-app.use('/users/', usersCtrl);
+app.use('/users/', ensureLogin, usersCtrl);
 
 
 // finally, tells the server to listen for connections
-app.listen(process.env.PORT || 3000, function() {
-    console.log("Server listening.");
+app.listen(process.env.PORT || 3001, function() {
+	console.log("Server listening.");
 });
