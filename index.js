@@ -11,12 +11,12 @@ var FileStore = require('session-file-store')(session);
 var NODE_ENV = process.env.NODE_ENV || 'development';
 var BASE_URL = (NODE_ENV === 'production') ? 'https://skulesite.herokuapps.com' : 'http://localhost:3000';
 
-//var ensureLoggedIn = require('connect-ensure-login');
 //var cookieParser = require('cookie-parser');
-// TODO: GET RID OF CHALK AND SASS-STREAM BELOW
-var sass = require('sass-stream');
 var chalk = require('chalk');
 
+var sassMiddleware = require('sass-stream');
+// var srcPath = __dirname + '/sass';
+// var destPath = __dirname + '/public/styles';
 
 // creates an instance of express
 var app = express();
@@ -58,6 +58,13 @@ var ensureLogin = function(req, res, next) {
 	}
 };
 
+// app.use(sassMiddleware({
+//     src: express.static(__dirname + '/public/sass');
+//     dest: express.static(__dirname + '/public/css');
+//     debug: true,
+//     outputStyle: 'expanded',
+//     prefix:  '/sass'
+// }));
 // loads public static directory
 app.use(express.static(__dirname + '/public'));
 

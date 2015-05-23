@@ -1,7 +1,7 @@
 {
   "name": "working_skoolsite",
   "version": "1.0.0",
-  "description": "",
+  "description": "This is a work-in-progress, complete refactoring version of the original SkuleSite project. The goal of this version is to design an application that will enable college-bound students to search for their dream school, using data scraped from the web and stored within the application database. This version will provide enhanced search features, such as the ability to search by location, major, and certain school characteristics. As in the first version, users will be able to select their favorite schools, and optionally to sort those schools according to their level of interest and likelihood of applying to each school.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -32,5 +32,13 @@
     "sequelize-cli": "^1.7.0",
     "session-file-store": "0.0.8",
     "underscore": "^1.8.3"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicholejeannine/SkuleSite.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nicholejeannine/SkuleSite/issues"
+  },
+  "homepage": "https://github.com/nicholejeannine/SkuleSite#readme"
 }
