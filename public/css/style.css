@@ -1,2 +1,154 @@
-body,html{background-size:cover;background-color:#fcfdff;border:0;font-family:"Lora", "Times", serif;font-size:16px;line-height:1.6;margin:0;outline:0;padding:0}.container{font-size:100%}.navbar{background-color:#000;color:#fcfdff;font-family:"Lora", "Times", serif;font-size:1.3em;font-weight:bold;height:3em}.navbar-right{font-weight:800}h1{color:#fcfdff;font-family:"Tangerine", cursive;font-size:3.4em;text-align:center;text-shadow:4px 4px 4px #aaa}h2{text-align:center;margin-bottom:3%}h3{text-align:center}h4{text-align:center;color:#111111;margin-bottom:2%}p{font-size:1em;margin-top:1%;padding:1% 4%;text-align:justify}p.titlePage{width:50%;color:#eee;text-align:center}a{color:#c6c6c6}a.navbar-brand{font-size:1.6em;background-color:rgba(0,0,0,0.9);height:inherit}.btn-primary{background-color:#a582d3;color:#cdecde}.btn-primary:hover{background-color:#cdaffa;color:#fcfdff}.btn-info{background-color:#03a3a3;color:#111}.btn-info:hover{background-color:#00eeee;color:#fcfdff}.schoolContainer{font-size:12px;border-color:rgba(187,190,191,0.82);border-radius:4px;border-style:solid;border-width:3px;width:400px;min-height:300px;list-style-type:none;margin:0;padding:4px}.schoolContainer li{margin:0 5px 5px 5px;padding:5px;font-size:1.2em;width:350px}.schoolContainer.list1{background-color:rgba(29,28,31,0.7)}.schoolContainer.list1 h3{color:#fcfdff}.schoolContainer.list2{background-color:rgba(255,255,31,0.7)}.schoolContainer.list2 h3{color:#fcfdff}.schoolContainer.list3{background-color:rgba(225,120,31,0.7)}.schoolContainer.list3 h3{color:#fcfdff}.schoolContainer.list4{background-color:rgba(64,195,31,0.7)}.schoolContainer.list4 h3{color:#fcfdff}.glyphicon-remove{font-size:inherit;padding:0 5px 5px 5px;color:#ff0003}
+body,
+html {
+    background-size: cover;
+    background-color: #fcfdff;
+    border: 0;
+    font-family: "Lora", "Times", serif;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+    outline: 0;
+    padding: 0
+}
+
+.container {
+    font-size: 100%
+}
+
+.navbar {
+    background-color: #000;
+    color: #fcfdff;
+    font-family: "Lora", "Times", serif;
+    font-size: 1.3em;
+    font-weight: bold;
+    height: 3em
+}
+
+.navbar-right {
+    font-weight: 800
+}
+
+h1 {
+    color: #fcfdff;
+    font-family: "Tangerine", cursive;
+    font-size: 3.4em;
+    text-align: center;
+    text-shadow: 4px 4px 4px #aaa
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 3%
+}
+
+h3 {
+    text-align: center
+}
+
+h4 {
+    text-align: center;
+    color: #111111;
+    margin-bottom: 2%
+}
+
+p {
+    font-size: 1em;
+    margin-top: 1%;
+    padding: 1% 4%;
+    text-align: justify
+}
+
+p.titlePage {
+    width: 50%;
+    color: #eee;
+    text-align: center
+}
+
+a {
+    color: #c6c6c6
+}
+
+a.navbar-brand {
+    font-size: 1.6em;
+    background-color: rgba(0, 0, 0, 0.9);
+    height: inherit
+}
+
+.btn-primary {
+    background-color: #a582d3;
+    color: #cdecde
+}
+
+.btn-primary:hover {
+    background-color: #cdaffa;
+    color: #fcfdff
+}
+
+.btn-info {
+    background-color: #03a3a3;
+    color: #111
+}
+
+.btn-info:hover {
+    background-color: #00eeee;
+    color: #fcfdff
+}
+
+.schoolContainer {
+    font-size: 12px;
+    border-color: rgba(187, 190, 191, 0.82);
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 3px;
+    width: 400px;
+    min-height: 300px;
+    list-style-type: none;
+    margin: 0;
+    padding: 4px
+}
+
+.schoolContainer li {
+    margin: 0 5px 5px 5px;
+    padding: 5px;
+    font-size: 1.2em;
+    width: 350px
+}
+
+.schoolContainer.list1 {
+    background-color: rgba(29, 28, 31, 0.7)
+}
+
+.schoolContainer.list1 h3 {
+    color: #fcfdff
+}
+
+.schoolContainer.list2 {
+    background-color: rgba(255, 255, 31, 0.7)
+}
+
+.schoolContainer.list2 h3 {
+    color: #fcfdff
+}
+
+.schoolContainer.list3 {
+    background-color: rgba(225, 120, 31, 0.7)
+}
+
+.schoolContainer.list3 h3 {
+    color: #fcfdff
+}
+
+.schoolContainer.list4 {
+    background-color: rgba(64, 195, 31, 0.7)
+}
+
+.schoolContainer.list4 h3 {
+    color: #fcfdff
+}
+
+.glyphicon-remove {
+    font-size: inherit;
+    padding: 0 5px 5px 5px;
+    color: #ff0003
+}
 /*# sourceMappingURL=style.css.map */

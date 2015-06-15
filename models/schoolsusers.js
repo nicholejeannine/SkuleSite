@@ -3,7 +3,7 @@ module.exports = function(sequelize, DataTypes) {
     var schoolsusers = sequelize.define('schoolsusers', {
         schoolId: DataTypes.INTEGER,
         userId: DataTypes.INTEGER,
-        color: {
+        listNumber: {
             type: DataTypes.INTEGER,
             default: 1
         }

@@ -1,20 +1,19 @@
 var express = require('express');
 var db = require('./models');
 var passportSettings = require('./controllers/passportSettings');
-var debug = require('debug');
-var flash = require('connect-flash');
+//var flash = require('connect-flash');
 var mainCtrl = require('./controllers/mainCtrl');
 var usersCtrl = require('./controllers/usersCtrl');
 var authCtrl = require('./controllers/authCtrl');
 var session = require('express-session');
 var FileStore = require('session-file-store')(session);
 var NODE_ENV = process.env.NODE_ENV || 'development';
-var BASE_URL = (NODE_ENV === 'production') ? 'https://skulesite.herokuapps.com' : 'http://localhost:3000';
+var BASE_URL = (NODE_ENV === 'production') ? 'https://skulesite.herokuapps.com' : 'http://localhost:3001';
 
 //var cookieParser = require('cookie-parser');
 var chalk = require('chalk');
 
-var sassMiddleware = require('sass-stream');
+//var sassMiddleware = require('sass-stream');
 // var srcPath = __dirname + '/sass';
 // var destPath = __dirname + '/public/styles';
 
@@ -36,12 +35,12 @@ app.use(session({
 }));
 
 
-// sets up flash messages
-app.use(flash());
-app.use(function(req, res, next) {
-	res.locals.alerts = req.flash();
-	next();
-});
+// // sets up flash messages
+// app.use(flash());
+// app.use(function(req, res, next) {
+// 	res.locals.alerts = req.flash();
+// 	next();
+// });
 
 
 
@@ -58,14 +57,6 @@ var ensureLogin = function(req, res, next) {
 	}
 };
 
-// app.use(sassMiddleware({
-//     src: express.static(__dirname + '/public/sass');
-//     dest: express.static(__dirname + '/public/css');
-//     debug: true,
-//     outputStyle: 'expanded',
-//     prefix:  '/sass'
-// }));
-// loads public static directory
 app.use(express.static(__dirname + '/public'));
 
 //debugging middleware for sessions

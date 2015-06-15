@@ -14,7 +14,7 @@ module.exports = {
             userId: {
                 type: Sequelize.INTEGER
             },
-            color: {
+            listNumber: {
                 type: Sequelize.INTEGER,
                 default: 1
             }

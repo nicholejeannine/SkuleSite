@@ -7,9 +7,7 @@ module.exports = function(sequelize, DataTypes) {
         timestamps: false,
         classMethods: {
             associate: function(models) {
-                models.program.belongsToMany(models.school, {
-                    through: models.programsschools
-                });
+            //    models.program.hasMany(models.programsschools);
             }
         }
     });

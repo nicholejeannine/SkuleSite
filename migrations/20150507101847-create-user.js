@@ -40,6 +40,25 @@ module.exports = {
         type: Sequelize.STRING,
         defaultValue: 'Definitely Schools'
 
+      },
+      list1color: {
+        type: Sequelize.STRING,
+        defaultValue: "rgba(29, 28, 31, 0.7);"
+
+      },
+      list2color: {
+        type: Sequelize.STRING,
+        defaultValue: "rgba(255, 255, 31, 0.7)"
+
+      },
+      list3color: {
+        type: Sequelize.STRING,
+        defaultValue: "rgba(225, 120, 31, 0.7)"
+
+      },
+      list4color: {
+        type: Sequelize.STRING,
+        defaultValue: "rgba(64, 195, 31, 0.7)"
       }
     });
   },

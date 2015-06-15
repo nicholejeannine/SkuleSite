@@ -1,77 +1,77 @@
 <% include ../partials/header.ejs%>
-<% include ../partials/authnav.ejs%>
+    <% include ../partials/authnav.ejs%>
 
-		<div class="page-header">
-			<h1 class="center-block"><small style="color: #fff">Welcome back <span style="color: #fff" id="username" data-username="username"> <%=values['welcomeName']%>! </span></small></h1>
-		</div>
-		<div class="content" <div class="row">
+        <div class="page-header">
+            <h1 class="center-block"><small style="color: #fff">Welcome back <span style="color: #fff" id="username" data-username="username"> <%=values['welcomeName']%>! </span></small></h1>
+        </div>
+        <div class="content">
+            <div class="row">
 
-			<div class="col-sm-12 col-lg-6">
-				<div class="schoolContainer bg-info droppable">
-					<h2>My Unsorted Schools</h2>
+                <div class="col-sm-12 col-lg-6">
+                    <div class="schoolContainer bg-info droppable">
+                        <h2>My Unsorted Schools</h2>
 
-					<ul class="sortable list1 schoolList" id="unsortedList">
-						<% if (values[ 'greyList']) {values[ 'greyList'].forEach(function(school){ %>
-							<li class="schoolCard draggable" data-schoolname="<%=school[ 'unitId']%>">
-								<i class="glyphicon glyphicon-remove"></i>
-								<%=school[ 'schoolname']%>
-							</li>
-							<% }) } %>
+                        <ul class="sortable list1 schoolList" id="unsortedList">
+                            <% if (values[ 'greyList']) {values[ 'greyList'].forEach(function(school){ %>
+                                <li class="schoolCard draggable" data-schoolname="<%=school[ 'unitId']%>">
+                                    <i class="glyphicon glyphicon-remove"></i>
+                                    <%=school[ 'schoolname']%>
+                                </li>
+                                <% }) } %>
 
+                        </ul>
+                    </div>
+                </div>
 
-					</ul>
-				</div>
-			</div>
+                <div class="col-sm-12 col-lg-6">
+                    <div class="schoolContainer bg-info droppable">
+                        <h2>My Maybe Schools</h2>
+                        <ul class="sortable list2 schoolList" id="maybeList">
+                            <% if (values[ 'yellowList']) {values[ 'yellowList'].forEach(function(school){ %>
+                                <li class="schoolCard draggable">
+                                    <i class="glyphicon glyphicon-remove"></i>
 
-			<div class="col-sm-12 col-lg-6">
-				<div class="schoolContainer bg-info droppable">
-					<h2>My Maybe Schools</h2>
-					<ul class="sortable list2 schoolList" id="maybeList">
-						<% if (values[ 'yellowList']) {values[ 'yellowList'].forEach(function(school){ %>
-							<li class="schoolCard draggable">
-								<i class="glyphicon glyphicon-remove"></i>
+                                    <%=school[ 'schoolname']%>
+                                </li>
+                                <% })} %>
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
-								<%=school[ 'schoolname']%>
-							</li>
-							<% })} %>
-					</ul>
-				</div>
-			</div>
-		</div>
+            <div class="row">
+                <div class="col-sm-12 col-lg-6">
+                    <div class="schoolContainer bg-info droppable">
+                        <h2>My Probably Schools</h2>
+                        <ul class="sortable list3 schoolList" id="probablyList">
+                            <% if (values[ 'orangeList']) {values[ 'orangeList'].forEach(function(school){ %>
+                                <li class="schoolCard draggable">
+                                    <i class="glyphicon glyphicon-remove"></i>
 
-		<div class="row">
-			<div class="col-sm-12 col-lg-6">
-				<div class="schoolContainer bg-info droppable">
-					<h2>My Probably Schools</h2>
-					<ul class="sortable list3 schoolList" id="probablyList">
-						<% if (values[ 'orangeList']) {values[ 'orangeList'].forEach(function(school){ %>
-							<li class="schoolCard draggable">
-								<i class="glyphicon glyphicon-remove"></i>
+                                    <%=school[ 'schoolname']%>
+                                </li>
+                                <% }) }%>
 
-								<%=school[ 'schoolname']%>
-							</li>
-							<% }) }%>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-lg-6">
+                    <div class="schoolContainer bg-info droppable">
+                        <h2>My Definitely Schools</h2>
+                        <ul class="sortable list4 schoolList" id="maybeList">
+                            <% if (values[ 'greenList']) {values[ 'greenList'].forEach(function(school){ %>
+                                <li class="schoolCard draggable">
+                                    <i class="glyphicon glyphicon-remove"></i>
 
-					</ul>
-				</div>
-			</div>
-			<div class="col-sm-12 col-lg-6">
-				<div class="schoolContainer bg-info droppable">
-					<h2>My Definitely Schools</h2>
-					<ul class="sortable list4 schoolList" id="maybeList">
-						<% if (values[ 'greenList']) {values[ 'greenList'].forEach(function(school){ %>
-							<li class="schoolCard draggable">
-								<i class="glyphicon glyphicon-remove"></i>
+                                    <%=school[ 'schoolname']%>
+                                </li>
+                                <% }) }%>
 
-								<%=school[ 'schoolname']%>
-							</li>
-							<% }) }%>
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
-					</ul>
-				</div>
-			</div>
-		</div>
+        </div>
 
-		</div>
-
-<% include ../partials/footer.ejs%>
+        <% include ../partials/footer.ejs%>

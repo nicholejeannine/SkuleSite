@@ -39,31 +39,7 @@ router.post('/login', urlencodedParser, passport.authenticate('local', {
     failureRedirect: '/auth/login'
 }));
 
-// router.post('/login', urlencodedParser, function(req, res, next) {
-//     var username = req.body.username;
-//     // Some logic here to create a new user or not
-//     passport.authenticate('local', {
-//             badRequestMessage: 'You must enter e-mail and password.'
-//         },
-//         function(err, user, info) {
-//             if (user) {
-//                 req.login(user, function(err) {
-//                     if (err) {
-//                         throw err;
-//                     }
-//                     res.render('users/', ({
-//                         username: username
-//                     }));
-//                 })
-//             } else {
-//                 var errorMsg = info && info.message ? info.message : 'Unknown error.';
 
-//                 res.render('auth/login', {
-//                     alerts: req.flash('danger', errorMsg)
-//                 });
-//             }
-//         });
-// });
 
 // posts to sign up and request a newly created user
 router.post('/register', urlencodedParser, function(req, res, next) {
@@ -92,7 +68,6 @@ router.post('/register', urlencodedParser, function(req, res, next) {
         };
 
 
-        console.log("Req.session.username = " + req.session.username)
             // if validation succeeds, check the database for existing user by same name.
             db.user.findOrCreate({
                 where: userQuery,

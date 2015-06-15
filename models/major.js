@@ -7,7 +7,7 @@ module.exports = function(sequelize, DataTypes) {
     major: {
       type: DataTypes.STRING
     },
-    submajor: {
+    submajors: {
       type: DataTypes.ARRAY(DataTypes.STRING)
     }
   }, {

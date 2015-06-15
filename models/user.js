@@ -37,13 +37,31 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue: 'Definitely Schools'
 
     },
+    
+      list1color: {
+        type: DataTypes.STRING,
+        defaultValue: "rgba(29, 28, 31, 0.7);"
+
+      },
+      list2color: {
+        type: DataTypes.STRING,
+        defaultValue: "rgba(255, 255, 31, 0.7)"
+
+      },
+      list3color: {
+        type: DataTypes.STRING,
+        defaultValue: "rgba(225, 120, 31, 0.7)"
+
+      },
+      list4color: {
+        type: DataTypes.STRING,
+        defaultValue: "rgba(64, 195, 31, 0.7)"
+      }
   }, {
     timestamps: false,
     classMethods: {
       associate: function(models) {
-        models.user.belongsToMany(models.school, {
-          through: models.schoolsusers
-        });
+        // models.user.belongsToMany(models.schoolsusers);
       }
     },
     instanceMethods: {

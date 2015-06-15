@@ -9,158 +9,31 @@
     <title>Skool Site</title>
 
     <!-- Bootstrap css-->
-    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet"> -->
     <!-- Custom fonts-->
     <link href='http://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine">
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-
-    <!-- Include all compiled plugins (below), or include individual files as needed. Right now using jQuery UI, so may not need this. TODO - evaluate if needed.
+<!--     <script src="/js/jQuery.min.js"></script>
+ -->    <!-- Include all compiled plugins (below), or include individual files as needed. Right now using jQuery UI, so may not need this. TODO - evaluate if needed.
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js" rel="stylesheet">  -->
 
     <!-- JQuery UI -->
-    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-
+<!--     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+ -->
     <!--  Custom stylesheet
   -->
-    <link href="/sass/style.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
     <!-- Custom client-side js -->
+    <script src="/js/angular.min.js"></script>
+    <script src="/js/angular-route.min.js"></script>
+    <script src="/js/angular-resource.min.js"></script>
+    <script src="/js/ui-bootstrap.min.js"></script>
+    <script src="/js/ui-bootstrap-tpls.min.js"></script>
+    <script src="/js/app.js"></script>
     <script src="/js/main.js"></script>
 </head>
 
-<body>
-    <nav class="navbar navbar-inverse" role="navigation">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <ul class="nav navbar-nav navbar-left">
-                    <li><a class="navbar-brand" href="/">Skool Site</a>
-                    </li>
-                    <li><i class="glyphicon glyphicon-education" aria-hidden="true"></i>
-                    </li>
-
-
-                </ul>
-
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
-
-
-                    <li><a href="/about">About</a>
-                    </li>
-                    <li><a href="/auth/register">Sign Up!</a>
-                    </li>
-                    <li><a href="/auth/">Sign In</a>
-                    </li>
-
-
-                </ul>
-
-            </div>
-            <!--/.nav-collapse -->
-        </div>
-        <!--/.container-fluid -->
-    </nav>
-
-    <div class="container-fluid">
-        <!-- Start bootlint testing space -->
-
-
-
-
-
-        <div class="page-header">
-            <h1 class="center-block"><small style="color: #fff">Welcome back <span style="color: #fff" id="username" data-username="username"> OMIT </span></small></h1>
-        </div>
-        <div class="content">
-            <div class="row">
-
-                <div class="col-sm-12 col-lg-6">
-                    <div class="schoolContainer list1 bg-info droppable">
-                        <h2>My Unsorted Schools</h2>
-
-                        <ul class="sortable schoolList" id="unsortedList">
-                            OMIT
-                            <li class="schoolCard draggable" data-schoolname="OMIT" <i class="glyphicon glyphicon-remove">
-                                </i>
-                                OMIT
-                            </li>
-                            OMIT
-
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="col-sm-12 col-lg-6">
-                    <div class="schoolContainer list2 bg-info droppable">
-                        <h2>My Maybe Schools</h2>
-                        <ul class="sortable  schoolList" id="maybeList">
-                            OMIT
-                            <li class="schoolCard draggable">
-                                <i class="glyphicon glyphicon-remove"></i> OMIT
-                            </li>
-                            OMIT
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-12 col-lg-6">
-                    <div class="schoolContainer list3 bg-info droppable">
-                        <h2>My Probably Schools</h2>
-                        <ul class="sortable  schoolList" id="probablyList">
-                            OMIT
-                            <li class="schoolCard draggable">
-                                <i class="glyphicon glyphicon-remove"></i> OMIT
-                            </li>
-                            OMIT
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-lg-6">
-                    <div class="schoolContainer list4 bg-info droppable">
-                        <h2>My Definitely Schools</h2>
-                        <ul class="sortable  schoolList" id="maybeList">
-                            OMIT
-                            <li class="schoolCard draggable">
-                                <i class="glyphicon glyphicon-remove"></i> OMIT
-                            </li>
-                            OMIT
-
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <!-- End bootlint testing space -->
-
-    </div>
-</body>
 
 </html>

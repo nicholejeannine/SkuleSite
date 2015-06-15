@@ -61,12 +61,9 @@ module.exports = function(sequelize, DataTypes) {
         timestamps: false,
         classMethods: {
             associate: function(models) {
-                models.school.belongsToMany(models.user, {
-                    through: models.schoolsusers
-                });
-                models.school.belongsToMany(models.program, {
-                    through: models.programsschools
-                });
+                // models.school.belongsToMany(models.schoolsusers);
+                // models.school.belongsToMany(models.programsschools);
+                // models.school.belongsToMany(models.ranking);
             }
         }
     });
